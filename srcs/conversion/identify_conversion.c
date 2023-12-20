@@ -6,14 +6,11 @@
 /*   By: tgrekov <tgrekov@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 03:41:27 by tgrekov           #+#    #+#             */
-/*   Updated: 2023/12/16 18:20:39 by tgrekov          ###   ########.fr       */
+/*   Updated: 2023/12/20 17:04:54 by tgrekov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "converters.h"
-
-//if (**format == 'f' || **format == 'F')
-	//return (c_float(args, subspec, *(*format - 1) == 'F'));
 
 int	identify_conversion(const char **format, va_list args,
 			t_subspec subspec, int *fd, int total)
@@ -31,7 +28,7 @@ int	identify_conversion(const char **format, va_list args,
 	if (**format == 's')
 		return (c_string(args, subspec, *fd));
 	if (**format == 'p')
-		return (c_pointer(args, subspec, *fd));
+		return (c_pointer(args, *fd));
 	if (**format == '%')
 		return (c_percent(*fd));
 	if (**format == 'n')

@@ -30,21 +30,25 @@ DEBUG_LEAKS_OBJ_DIR = $(OBJ_BASE_DIR)debug_leaks/
 #List of source files
 SRC_NAMES =	ft_printf							\
 			handle_sequence						\
+			utils/utils							\
 			conversion/identify_conversion		\
 			conversion/converters/c_char		\
+			conversion/converters/c_ft_lst		\
 			conversion/converters/c_int			\
 			conversion/converters/c_percent		\
 			conversion/converters/c_pointer		\
+			conversion/converters/c_set_fd		\
 			conversion/converters/c_store		\
 			conversion/converters/c_string		\
 			conversion/converters/c_uhex		\
 			conversion/converters/c_uint		\
-			conversion/converters/c_uoct		
+			conversion/converters/c_uoct
 
 #List of headers
-HEADER_NAMES = printf.h							\
-				conversion/converters.h			\
-				conversion/def_sub.h
+HEADER_NAMES =	printf.h						\
+				utils/utils.h					\
+				utils/def_sub.h					\
+				conversion/converters.h
 
 #### END OF CONFIGURABLE SECTION ####
 

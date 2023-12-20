@@ -6,12 +6,12 @@
 /*   By: tgrekov <tgrekov@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 18:18:34 by tgrekov           #+#    #+#             */
-/*   Updated: 2023/12/16 18:25:03 by tgrekov          ###   ########.fr       */
+/*   Updated: 2023/12/20 17:11:35 by tgrekov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../converters.h"
-#include "../../../libft/libft.h"
+#include "../../utils/def_sub.h"
 
 int	c_store(va_list args, t_subspec subspec, int total)
 {

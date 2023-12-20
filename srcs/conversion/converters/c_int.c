@@ -6,27 +6,13 @@
 /*   By: tgrekov <tgrekov@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 05:18:23 by tgrekov           #+#    #+#             */
-/*   Updated: 2023/12/16 18:06:24 by tgrekov          ###   ########.fr       */
+/*   Updated: 2023/12/20 16:53:32 by tgrekov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../converters.h"
-
-static int	putll(long long n, int fd)
-{
-	char	c;
-	int		res;
-
-	res = 0;
-	if (n > 9)
-		res = putll(n / 10, fd);
-	if (res == -1)
-		return (-1);
-	c = n % 10 + '0';
-	if (!write(fd, &c, 1))
-		return (-1);
-	return (res + 1);
-}
+#include "../../utils/utils.h"
+#include "../../utils/def_sub.h"
 
 static long long	getarg(va_list args, t_subspec subspec)
 {
@@ -50,20 +36,17 @@ static long long	getarg(va_list args, t_subspec subspec)
 int	c_int(va_list args, t_subspec subspec, int fd)
 {
 	long long	n;
-	int			len;
+	int			res;
+	int			res2;
 
 	n = getarg(args, subspec);
-	if (n == (-LLONG_MAX - 1LL))
-		return (write(fd, "-9223372036854775808", 20));
-	len = 0;
-	if (n < 0)
-	{
-		len = write(fd, "-", 1);
-		n = -n;
-	}
-	else if (subspec.force_sign)
-		len = write(fd, "+", 1);
-	if (len < 0)
-		return (len);
-	return (len + putll(n, fd));
+	res = 0;
+	if (n > -1 && subspec.force_sign)
+		res = write(fd, "+", 1);
+	if (res == -1)
+		return (-1);
+	res2 = putllbase(n, "0123456789", 10, fd);
+	if (res2 == -1)
+		return (-1);
+	return (res + res2);
 }

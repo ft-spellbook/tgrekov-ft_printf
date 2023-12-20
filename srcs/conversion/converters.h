@@ -6,7 +6,7 @@
 /*   By: tgrekov <tgrekov@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 00:29:00 by tgrekov           #+#    #+#             */
-/*   Updated: 2023/12/16 18:25:36 by tgrekov          ###   ########.fr       */
+/*   Updated: 2023/12/20 17:05:01 by tgrekov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include <stdarg.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include "def_sub.h"
 
 typedef enum e_lenmod
 {
@@ -43,8 +42,6 @@ typedef struct s_subspec
 	t_lenmod	lenmod;
 }		t_subspec;
 
-int		putuhexll(unsigned long long n, int upper);
-
 int		identify_conversion(const char **format, va_list args,
 			t_subspec subspec, int *fd, int total);
 int		c_int(va_list args, t_subspec subspec, int fd);
@@ -54,7 +51,7 @@ int		c_uhex(va_list args, t_subspec subspec, int upper, int fd);
 //int		c_float(va_list args, t_subspec subspec, int upper);
 int		c_char(va_list args, t_subspec subspec, int fd);
 int		c_string(va_list args, t_subspec subspec, int fd);
-int		c_pointer(va_list args, t_subspec subspec, int fd);
+int		c_pointer(va_list args, int fd);
 int		c_percent(int fd);
 int		c_ft_lst(va_list args, t_subspec subspec, int fd);
 int		c_set_fd(va_list args, int *fd);

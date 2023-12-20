@@ -6,7 +6,7 @@
 /*   By: tgrekov <tgrekov@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 00:41:01 by tgrekov           #+#    #+#             */
-/*   Updated: 2023/12/16 18:25:57 by tgrekov          ###   ########.fr       */
+/*   Updated: 2023/12/20 17:02:48 by tgrekov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static int	subspec_parse_width_or_precision(const char **format, va_list args)
 		return (va_arg(args, int));
 	}
 	res = ft_atoi(*format);
-	*format += intlength(res);
+	*format += intlen(res);
 	return (res);
 }
 
