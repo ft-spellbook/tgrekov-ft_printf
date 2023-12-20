@@ -6,7 +6,7 @@
 /*   By: tgrekov <tgrekov@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 23:03:16 by tgrekov           #+#    #+#             */
-/*   Updated: 2023/12/20 17:16:43 by tgrekov          ###   ########.fr       */
+/*   Updated: 2023/12/20 17:29:38 by tgrekov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ int	ft_printf(const char *format, ...)
 /*
 int	main(void)
 {
-	ft_printf("%%c");
+	ft_printf("%d\n", -10);
+	//printf("%x\n", 10);
 }
 */

@@ -30,7 +30,8 @@ DEBUG_LEAKS_OBJ_DIR = $(OBJ_BASE_DIR)debug_leaks/
 #List of source files
 SRC_NAMES =	ft_printf							\
 			handle_sequence						\
-			utils/utils							\
+			utils/intlen						\
+			utils/putbase						\
 			conversion/identify_conversion		\
 			conversion/converters/c_char		\
 			conversion/converters/c_ft_lst		\
