@@ -6,14 +6,14 @@
 /*   By: tgrekov <tgrekov@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 00:41:01 by tgrekov           #+#    #+#             */
-/*   Updated: 2023/12/20 17:02:48 by tgrekov          ###   ########.fr       */
+/*   Updated: 2023/12/20 19:56:40 by tgrekov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdarg.h>
-#include "conversion/converters.h"
-#include "utils/utils.h"
-#include "../libft/libft.h"
+#include "handlers.h"
+#include "../utils/utils.h"
+#include "../../libft/libft.h"
 
 static void	init_subspec(t_subspec *subspec)
 {
@@ -98,7 +98,7 @@ int	handle_sequence(const char **format, va_list args, int *fd, int total)
 
 	init_subspec(&subspec);
 	parse_subspec(format, &subspec, args);
-	res = identify_conversion(format, args, subspec, fd, total);
+	res = identify_sequence(format, args, subspec, fd, total);
 	(*format)++;
 	return (res);
 }

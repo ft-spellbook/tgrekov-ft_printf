@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   c_set_fd.c                                         :+:      :+:    :+:   */
+/*   set_fd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tgrekov <tgrekov@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 17:58:03 by tgrekov           #+#    #+#             */
-/*   Updated: 2023/12/16 18:05:51 by tgrekov          ###   ########.fr       */
+/*   Updated: 2023/12/20 19:33:14 by tgrekov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../converters.h"
-#include "../../../libft/libft.h"
+#include <stdarg.h>
 
-int	c_set_fd(va_list args, int *fd)
+int	seq_set_fd(va_list args, int *fd)
 {
 	*fd = va_arg(args, int);
 	return (0);

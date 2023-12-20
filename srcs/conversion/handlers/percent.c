@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   percent.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tgrekov <tgrekov@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/31 23:08:39 by tgrekov           #+#    #+#             */
-/*   Updated: 2023/12/20 19:50:38 by tgrekov          ###   ########.fr       */
+/*   Created: 2023/11/01 11:36:38 by tgrekov           #+#    #+#             */
+/*   Updated: 2023/12/20 19:22:49 by tgrekov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include <unistd.h>
 
-# include <stdarg.h>
-
-int	ft_printf(const char *format, ...) __attribute__((format(printf, 1, 2)));
-
-#endif
+int	seq_percent(int fd)
+{
+	return (write(fd, "%", 1));
+}

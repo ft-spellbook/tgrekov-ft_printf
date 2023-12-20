@@ -1,29 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   c_string.c                                         :+:      :+:    :+:   */
+/*   subspec.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tgrekov <tgrekov@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/01 08:25:24 by tgrekov           #+#    #+#             */
-/*   Updated: 2023/12/16 18:04:47 by tgrekov          ###   ########.fr       */
+/*   Created: 2023/12/20 19:20:17 by tgrekov           #+#    #+#             */
+/*   Updated: 2023/12/20 19:20:34 by tgrekov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../converters.h"
-#include "../../../libft/libft.h"
+#ifndef SUBSPEC_H
+# define SUBSPEC_H
 
-int	c_string(va_list args, t_subspec subspec, int fd)
+typedef enum e_lenmod
 {
-	void	*str;
-	size_t	len;
+	none	= 0,
+	hh		= 1,
+	h		= 2,
+	l		= 3,
+	ll		= 4,
+	j		= 5,
+	z		= 6,
+	t		= 7,
+	L		= 8
+}	t_lenmod;
 
-	if (subspec.lenmod == l)
-		str = va_arg(args, wchar_t *);
-	else
-		str = va_arg(args, char *);
-	if (!str)
-		return (write(fd, "(null)", 6));
-	len = ft_strlen(str);
-	return (write(fd, str, len));
-}
+typedef struct s_subspec
+{
+	int			left_justify;
+	int			force_sign;
+	int			space_blank_sign;
+	int			force_decimal;
+	int			zero_pad;
+	int			min_width;
+	int			precision;
+	t_lenmod	lenmod;
+}		t_subspec;
+
+#endif

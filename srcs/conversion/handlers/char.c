@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   c_pointer.c                                        :+:      :+:    :+:   */
+/*   char.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tgrekov <tgrekov@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/01 08:38:51 by tgrekov           #+#    #+#             */
-/*   Updated: 2023/12/20 17:44:03 by tgrekov          ###   ########.fr       */
+/*   Created: 2023/11/01 00:22:38 by tgrekov           #+#    #+#             */
+/*   Updated: 2023/12/20 19:48:16 by tgrekov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../converters.h"
-#include "../../utils/utils.h"
+#include <stdarg.h>
+#include <unistd.h>
 
-int	c_pointer(va_list args, int fd)
+int	seq_char(va_list args, int fd)
 {
-	unsigned long long	n;
+	char	c;
 
-	n = (unsigned long long) va_arg(args, void *);
-	if (write(fd, "0x", 2) == -1)
-		return (-1);
-	return (putullbase(n, "0123456789abcdef", fd) + 2);
+	c = (char) va_arg(args, int);
+	return (write(fd, &c, 1));
 }

@@ -1,16 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   c_uint.c                                           :+:      :+:    :+:   */
+/*   uhex.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tgrekov <tgrekov@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/01 06:50:06 by tgrekov           #+#    #+#             */
-/*   Updated: 2023/12/20 17:47:01 by tgrekov          ###   ########.fr       */
+/*   Created: 2023/11/01 07:07:16 by tgrekov           #+#    #+#             */
+/*   Updated: 2023/12/20 19:48:52 by tgrekov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../converters.h"
+#include <stdarg.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include "../subspec.h"
 #include "../../utils/utils.h"
 #include "../../utils/def_sub.h"
 
@@ -33,7 +36,7 @@ static unsigned long long	getarg(va_list args, t_subspec subspec)
 	return (va_arg(args, unsigned int));
 }
 
-int	c_uint(va_list args, t_subspec subspec, int fd)
+int	seq_uhex(va_list args, t_subspec subspec, int upper, int fd)
 {
 	unsigned long long	n;
 	int					res;
@@ -45,7 +48,10 @@ int	c_uint(va_list args, t_subspec subspec, int fd)
 		res = write(fd, "+", 1);
 	if (res == -1)
 		return (-1);
-	res2 = putullbase(n, "0123456789", fd);
+	if (upper)
+		res2 = putullbase(n, "0123456789ABCDEF", fd);
+	else
+		res2 = putullbase(n, "0123456789abcdef", fd);
 	if (res2 == -1)
 		return (-1);
 	return (res + res2);

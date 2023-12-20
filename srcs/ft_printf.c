@@ -6,12 +6,12 @@
 /*   By: tgrekov <tgrekov@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 23:03:16 by tgrekov           #+#    #+#             */
-/*   Updated: 2023/12/20 17:29:38 by tgrekov          ###   ########.fr       */
+/*   Updated: 2023/12/20 20:32:34 by tgrekov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/libft.h"
-#include "ft_printf.h"
+#include "conversion/handlers.h"
 
 static int	do_segment(const char **format, va_list args, int *fd, int total)
 {
