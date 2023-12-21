@@ -23,10 +23,11 @@ DEBUG_OBJ_DIR = $(OBJ_BASE_DIR)debug/
 
 #List of source files
 SRC_NAMES =	ft_printf						\
-			utils/ll_len					\
+			utils/ull_len_base				\
 			utils/putbase					\
 			utils/repeat_str_n				\
-			utils/add_err					\
+			utils/wrap_err					\
+			utils/max						\
 			conversion/handle_sequence		\
 			conversion/identify_sequence	\
 			conversion/handlers/char		\
@@ -105,6 +106,8 @@ debug_set:
 	$(eval OBJS = $(DEBUG_OBJS))
 
 debug: debug_set $(DEBUG_NAME)
+
+bonus: all
 
 #Clean up resources generated during build
 clean:

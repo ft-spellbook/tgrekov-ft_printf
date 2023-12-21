@@ -1,26 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ll_len.c                                           :+:      :+:    :+:   */
+/*   add_err.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tgrekov <tgrekov@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/16 17:31:15 by tgrekov           #+#    #+#             */
-/*   Updated: 2023/12/20 22:27:16 by tgrekov          ###   ########.fr       */
+/*   Created: 2023/12/21 02:49:16 by tgrekov           #+#    #+#             */
+/*   Updated: 2023/12/21 03:55:36 by tgrekov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ll_len(long long n)
+int	wrap_err(int n, int *total)
 {
-	int	len;
-
-	len = 0;
-	if (n < 0)
-		len++;
-	while (n)
+	if (n == -1)
 	{
-		n /= 10;
-		len++;
+		*total = -1;
+		return (0);
 	}
-	return (len);
+	*total += n;
+	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: tgrekov <tgrekov@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 05:18:23 by tgrekov           #+#    #+#             */
-/*   Updated: 2023/12/21 03:08:29 by tgrekov          ###   ########.fr       */
+/*   Updated: 2023/12/21 07:15:44 by tgrekov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,15 @@ static long long	getarg(va_list args, t_subspec subspec)
 	return (va_arg(args, int));
 }
 
+static unsigned long long	lltull(long long n)
+{
+	if (n == -LLONG_MAX - 1LL)
+		return ((unsigned long long)((n + 1) * -1) + 1ULL);
+	else if (n < 0)
+		return (-n);
+	return (n);
+}
+
 static int	left_subspec(t_subspec subspec, long long n, int pad_n, int fd)
 {
 	int	res_pad;
@@ -43,48 +52,47 @@ static int	left_subspec(t_subspec subspec, long long n, int pad_n, int fd)
 
 	res_pad = 0;
 	if (subspec.min_width && !subspec.left_justify && subspec.pad_str[0] == ' '
-		&& !add_err(repeat_str_n(subspec.pad_str, pad_n, fd), &res_pad))
+		&& !wrap_err(repeat_str_n(subspec.pad_str, pad_n, fd), &res_pad))
 		return (-1);
 	res_sign = 0;
 	if (n < 0)
 		res_sign = write(fd, "-", 1);
-	else if (subspec.force_sign)
-		res_sign = write(fd, "+", 1);
-	else if (subspec.space_blank_sign)
-		res_sign = write(fd, " ", 1);
+	else if (subspec.forced_sign)
+		res_sign = write(fd, subspec.forced_sign, 1);
 	if (res_sign == -1)
 		return (-1);
 	if (subspec.min_width && !subspec.left_justify && subspec.pad_str[0] == '0'
-		&& !add_err(repeat_str_n(subspec.pad_str, pad_n, fd), &res_pad))
+		&& !wrap_err(repeat_str_n(subspec.pad_str, pad_n, fd), &res_pad))
+		return (-1);
+	if (subspec.precision > 0 && !wrap_err(
+			repeat_str_n("0000000000", subspec.precision
+				- ull_len_base(lltull(n), 10), fd), &res_pad))
 		return (-1);
 	return (res_pad + res_sign);
 }
 
 int	seq_int(va_list args, t_subspec subspec, int fd)
 {
-	long long	n;
-	int			res_total;
-	int			res_nbr;
-	int			pad_n;
+	long long			n;
+	unsigned long long	un;
+	int					res_total;
+	int					pad_n;
 
 	n = getarg(args, subspec);
-	pad_n = subspec.min_width - ll_len(n) - ((n > -1
-				&& subspec.force_sign) || subspec.space_blank_sign);
-	if (!add_err(left_subspec(subspec, n, pad_n, fd), &res_total))
+	un = lltull(n);
+	pad_n = subspec.min_width - (n < 0 || subspec.forced_sign);
+	if (subspec.precision == -1)
+		pad_n -= ull_len_base(un, 10);
+	else if (subspec.precision)
+		pad_n -= max(ull_len_base(un, 10), subspec.precision);
+	res_total = 0;
+	if (!wrap_err(left_subspec(subspec, n, pad_n, fd), &res_total))
 		return (-1);
-	if (n == -LLONG_MAX - 1LL)
-	{
-		n = (n + 1) * -1;
-		res_nbr = putullbase((unsigned long long) n + 1ULL, "0123456789", fd);
-	}
-	else if (n < 0)
-		res_nbr = putullbase(-n, "0123456789", fd);
-	else
-		res_nbr = putullbase(n, "0123456789", fd);
-	if (res_nbr == -1)
+	if (!(!un && !subspec.precision)
+		&& !wrap_err(putullbase(un, "0123456789", fd), &res_total))
 		return (-1);
 	if (subspec.min_width && subspec.left_justify
-		&& !add_err(repeat_str_n(subspec.pad_str, pad_n, fd), &res_total))
+		&& !wrap_err(repeat_str_n(subspec.pad_str, pad_n, fd), &res_total))
 		return (-1);
-	return (res_total + res_nbr);
+	return (res_total);
 }

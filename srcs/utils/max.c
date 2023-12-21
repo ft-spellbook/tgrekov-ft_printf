@@ -1,40 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   subspec.h                                          :+:      :+:    :+:   */
+/*   max.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tgrekov <tgrekov@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/20 19:20:17 by tgrekov           #+#    #+#             */
-/*   Updated: 2023/12/21 05:36:14 by tgrekov          ###   ########.fr       */
+/*   Created: 2023/12/21 04:54:00 by tgrekov           #+#    #+#             */
+/*   Updated: 2023/12/21 04:54:39 by tgrekov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SUBSPEC_H
-# define SUBSPEC_H
-
-typedef enum e_lenmod
+int	max(int a, int b)
 {
-	none	= 0,
-	hh		= 1,
-	h		= 2,
-	l		= 3,
-	ll		= 4,
-	j		= 5,
-	z		= 6,
-	t		= 7,
-	L		= 8
-}	t_lenmod;
-
-typedef struct s_subspec
-{
-	int			left_justify;
-	char		*forced_sign;
-	int			force_decimal;
-	char		*pad_str;
-	int			min_width;
-	int			precision;
-	t_lenmod	lenmod;
-}		t_subspec;
-
-#endif
+	if (a > b)
+		return (a);
+	return (b);
+}

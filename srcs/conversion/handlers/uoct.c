@@ -6,7 +6,7 @@
 /*   By: tgrekov <tgrekov@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 06:59:50 by tgrekov           #+#    #+#             */
-/*   Updated: 2023/12/20 19:49:15 by tgrekov          ###   ########.fr       */
+/*   Updated: 2023/12/21 07:36:03 by tgrekov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,20 +36,42 @@ static unsigned long long	getarg(va_list args, t_subspec subspec)
 	return (va_arg(args, unsigned int));
 }
 
+static int	left_subspec(t_subspec subspec,
+	unsigned long long n, int pad_n, int fd)
+{
+	int	res;
+
+	res = 0;
+	if (subspec.min_width && !subspec.left_justify && subspec.pad_str[0] == ' '
+		&& !wrap_err(repeat_str_n(subspec.pad_str, pad_n, fd), &res))
+		return (-1);
+	if (subspec.forced_sign
+		&& !wrap_err(write(fd, subspec.forced_sign, 1), &res))
+		return (-1);
+	if (subspec.min_width && !subspec.left_justify && subspec.pad_str[0] == '0'
+		&& !wrap_err(repeat_str_n(subspec.pad_str, pad_n, fd), &res))
+		return (-1);
+	if (subspec.precision > 0)
+		wrap_err(repeat_str_n("0000000000", subspec.precision
+				- ull_len_base(n, 8), fd), &res);
+	return (res);
+}
+
 int	seq_uoct(va_list args, t_subspec subspec, int fd)
 {
 	unsigned long long	n;
 	int					res;
-	int					res2;
+	int					pad_n;
 
 	n = getarg(args, subspec);
+	pad_n = subspec.min_width - !!subspec.forced_sign;
+	if (subspec.precision == -1)
+		pad_n -= ull_len_base(n, 8);
+	else if (subspec.precision)
+		pad_n -= max(ull_len_base(n, 8), subspec.precision);
 	res = 0;
-	if (subspec.force_sign)
-		res = write(fd, "+", 1);
-	if (res == -1)
+	if (!wrap_err(left_subspec(subspec, n, pad_n, fd), &res))
 		return (-1);
-	res2 = putullbase(n, "01234567", fd);
-	if (res2 == -1)
-		return (-1);
-	return (res + res2);
+	wrap_err(putullbase(n, "01234567", fd), &res);
+	return (res);
 }

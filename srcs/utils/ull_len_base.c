@@ -1,22 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   add_err.c                                         :+:      :+:    :+:   */
+/*   ull_len_base.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tgrekov <tgrekov@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/21 02:49:16 by tgrekov           #+#    #+#             */
-/*   Updated: 2023/12/21 03:07:57 by tgrekov          ###   ########.fr       */
+/*   Created: 2023/12/16 17:31:15 by tgrekov           #+#    #+#             */
+/*   Updated: 2023/12/21 05:52:23 by tgrekov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	add_err(int n, int *total)
+int	ull_len_base(unsigned long long n, int base)
 {
-	if (n == -1)
+	int	len;
+
+	len = 0;
+	if (n == 0)
+		len++;
+	while (n)
 	{
-		*total = -1;
-		return (0);
+		n /= base;
+		len++;
 	}
-	*total += n;
-	return (1);
+	return (len);
 }
