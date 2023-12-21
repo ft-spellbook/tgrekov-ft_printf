@@ -6,7 +6,7 @@
 /*   By: tgrekov <tgrekov@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 08:25:24 by tgrekov           #+#    #+#             */
-/*   Updated: 2023/12/20 19:45:52 by tgrekov          ###   ########.fr       */
+/*   Updated: 2023/12/20 21:27:20 by tgrekov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 int	seq_string(va_list args, int fd)
 {
-	void	*str;
+	char	*str;
 
 	str = va_arg(args, char *);
 	if (!str)

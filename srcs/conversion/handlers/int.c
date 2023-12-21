@@ -6,7 +6,7 @@
 /*   By: tgrekov <tgrekov@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 05:18:23 by tgrekov           #+#    #+#             */
-/*   Updated: 2023/12/20 19:32:05 by tgrekov          ###   ########.fr       */
+/*   Updated: 2023/12/21 02:49:45 by tgrekov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,20 +36,55 @@ static long long	getarg(va_list args, t_subspec subspec)
 	return (va_arg(args, int));
 }
 
+static int	left_subspec(t_subspec subspec, long long n, int unp_len, int fd)
+{
+	int	res_pad;
+	int	res_sign;
+
+	res_pad = 0;
+	if (subspec.min_width && !subspec.left_justify && subspec.pad_str[0] == ' '
+		&& !wrap_err(repeat_str_n(subspec.pad_str, unp_len, fd), &res_pad))
+		return (-1);
+	res_sign = 0;
+	if (n < 0)
+		res_sign = write(fd, "-", 1);
+	else if (subspec.force_sign)
+		res_sign = write(fd, "+", 1);
+	else if (subspec.space_blank_sign)
+		res_sign = write(fd, " ", 1);
+	if (res_sign == -1)
+		return (-1);
+	if (subspec.min_width && !subspec.left_justify && subspec.pad_str[0] == '0'
+		&& !wrap_err(repeat_str_n(subspec.pad_str, unp_len, fd), &res_pad))
+		return (-1);
+	return (res_pad + res_sign);
+}
+
 int	seq_int(va_list args, t_subspec subspec, int fd)
 {
 	long long	n;
-	int			res;
-	int			res2;
+	int			res_total;
+	int			res_nbr;
+	int			unp_len;
 
 	n = getarg(args, subspec);
-	res = 0;
-	if (n > -1 && subspec.force_sign)
-		res = write(fd, "+", 1);
-	if (res == -1)
+	unp_len = subspec.min_width - ll_len(n) - ((n > -1
+				&& subspec.force_sign) || subspec.space_blank_sign);
+	if (!wrap_err(left_subspec(subspec, n, unp_len, fd), &res_total))
 		return (-1);
-	res2 = putllbase(n, "0123456789", fd);
-	if (res2 == -1)
+	if (n == -LLONG_MAX - 1LL)
+	{
+		n = (n + 1) * -1;
+		res_nbr = putullbase((unsigned long long) n + 1ULL, "0123456789", fd);
+	}
+	else if (n < 0)
+		res_nbr = putullbase(-n, "0123456789", fd);
+	else
+		res_nbr = putullbase(n, "0123456789", fd);
+	if (res_nbr == -1)
 		return (-1);
-	return (res + res2);
+	if (subspec.min_width && subspec.left_justify
+		&& !wrap_err(repeat_str_n(subspec.pad_str, unp_len, fd), &res_total))
+		return (-1);
+	return (res_total + res_nbr);
 }

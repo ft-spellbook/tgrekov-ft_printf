@@ -6,7 +6,7 @@
 /*   By: tgrekov <tgrekov@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 19:20:17 by tgrekov           #+#    #+#             */
-/*   Updated: 2023/12/20 19:20:34 by tgrekov          ###   ########.fr       */
+/*   Updated: 2023/12/20 22:13:29 by tgrekov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ typedef struct s_subspec
 	int			force_sign;
 	int			space_blank_sign;
 	int			force_decimal;
-	int			zero_pad;
+	char		*pad_str;
 	int			min_width;
 	int			precision;
 	t_lenmod	lenmod;

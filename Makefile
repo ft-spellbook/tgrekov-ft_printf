@@ -23,8 +23,10 @@ DEBUG_OBJ_DIR = $(OBJ_BASE_DIR)debug/
 
 #List of source files
 SRC_NAMES =	ft_printf						\
-			utils/intlen					\
+			utils/ll_len					\
 			utils/putbase					\
+			utils/repeat_str_n				\
+			utils/wrap_err					\
 			conversion/handle_sequence		\
 			conversion/identify_sequence	\
 			conversion/handlers/char		\

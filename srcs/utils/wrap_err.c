@@ -1,21 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   wrap_err.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tgrekov <tgrekov@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/16 17:32:00 by tgrekov           #+#    #+#             */
-/*   Updated: 2023/12/21 02:50:32 by tgrekov          ###   ########.fr       */
+/*   Created: 2023/12/21 02:49:16 by tgrekov           #+#    #+#             */
+/*   Updated: 2023/12/21 02:49:29 by tgrekov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
-
-int	ll_len(long long n);
-int	putullbase(unsigned long long n, char *base, int fd);
-int	repeat_str_n(const char *str, int n, int fd);
-int	wrap_err(int n, int *total);
-
-#endif
+int	wrap_err(int n, int *total)
+{
+	if (!n)
+	{
+		*total = -1;
+		return (0);
+	}
+	*total += n;
+	return (1);
+}
