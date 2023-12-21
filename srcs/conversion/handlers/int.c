@@ -6,7 +6,7 @@
 /*   By: tgrekov <tgrekov@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 05:18:23 by tgrekov           #+#    #+#             */
-/*   Updated: 2023/12/21 02:49:45 by tgrekov          ###   ########.fr       */
+/*   Updated: 2023/12/21 03:08:29 by tgrekov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,14 @@ static long long	getarg(va_list args, t_subspec subspec)
 	return (va_arg(args, int));
 }
 
-static int	left_subspec(t_subspec subspec, long long n, int unp_len, int fd)
+static int	left_subspec(t_subspec subspec, long long n, int pad_n, int fd)
 {
 	int	res_pad;
 	int	res_sign;
 
 	res_pad = 0;
 	if (subspec.min_width && !subspec.left_justify && subspec.pad_str[0] == ' '
-		&& !wrap_err(repeat_str_n(subspec.pad_str, unp_len, fd), &res_pad))
+		&& !add_err(repeat_str_n(subspec.pad_str, pad_n, fd), &res_pad))
 		return (-1);
 	res_sign = 0;
 	if (n < 0)
@@ -55,7 +55,7 @@ static int	left_subspec(t_subspec subspec, long long n, int unp_len, int fd)
 	if (res_sign == -1)
 		return (-1);
 	if (subspec.min_width && !subspec.left_justify && subspec.pad_str[0] == '0'
-		&& !wrap_err(repeat_str_n(subspec.pad_str, unp_len, fd), &res_pad))
+		&& !add_err(repeat_str_n(subspec.pad_str, pad_n, fd), &res_pad))
 		return (-1);
 	return (res_pad + res_sign);
 }
@@ -65,12 +65,12 @@ int	seq_int(va_list args, t_subspec subspec, int fd)
 	long long	n;
 	int			res_total;
 	int			res_nbr;
-	int			unp_len;
+	int			pad_n;
 
 	n = getarg(args, subspec);
-	unp_len = subspec.min_width - ll_len(n) - ((n > -1
+	pad_n = subspec.min_width - ll_len(n) - ((n > -1
 				&& subspec.force_sign) || subspec.space_blank_sign);
-	if (!wrap_err(left_subspec(subspec, n, unp_len, fd), &res_total))
+	if (!add_err(left_subspec(subspec, n, pad_n, fd), &res_total))
 		return (-1);
 	if (n == -LLONG_MAX - 1LL)
 	{
@@ -84,7 +84,7 @@ int	seq_int(va_list args, t_subspec subspec, int fd)
 	if (res_nbr == -1)
 		return (-1);
 	if (subspec.min_width && subspec.left_justify
-		&& !wrap_err(repeat_str_n(subspec.pad_str, unp_len, fd), &res_total))
+		&& !add_err(repeat_str_n(subspec.pad_str, pad_n, fd), &res_total))
 		return (-1);
 	return (res_total + res_nbr);
 }

@@ -26,7 +26,7 @@ SRC_NAMES =	ft_printf						\
 			utils/ll_len					\
 			utils/putbase					\
 			utils/repeat_str_n				\
-			utils/wrap_err					\
+			utils/add_err					\
 			conversion/handle_sequence		\
 			conversion/identify_sequence	\
 			conversion/handlers/char		\
