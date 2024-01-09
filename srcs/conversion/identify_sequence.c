@@ -6,7 +6,7 @@
 /*   By: tgrekov <tgrekov@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 03:41:27 by tgrekov           #+#    #+#             */
-/*   Updated: 2023/12/20 19:50:08 by tgrekov          ###   ########.fr       */
+/*   Updated: 2024/01/09 17:44:42 by tgrekov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ int	identify_sequence(const char **format, va_list args,
 	if (**format == 'x' || **format == 'X')
 		return (seq_uhex(args, subspec, **format == 'X', *fd));
 	if (**format == 'c')
-		return (seq_char(args, *fd));
+		return (seq_char(args, subspec, *fd));
 	if (**format == 's')
-		return (seq_string(args, *fd));
+		return (seq_string(args, subspec, *fd));
 	if (**format == 'p')
 		return (seq_pointer(args, *fd));
 	if (**format == '%')

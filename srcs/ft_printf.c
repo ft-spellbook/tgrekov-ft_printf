@@ -6,7 +6,7 @@
 /*   By: tgrekov <tgrekov@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 23:03:16 by tgrekov           #+#    #+#             */
-/*   Updated: 2023/12/21 07:27:56 by tgrekov          ###   ########.fr       */
+/*   Updated: 2024/01/09 18:14:18 by tgrekov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,12 @@ int	ft_printf(const char *format, ...)
 	return (total);
 }
 
-/*
+
 #include <stdio.h>
+#include <limits.h>
 
 int	main(void)
 {
-	ft_printf("%2ds\n", 0);
-	printf("%2ds\n", 0);
+	//ft_printf("%10p, %10p, %10p, %10p, %10p, %10p\n", (void *)0, (void *)0xABCDE, (void *)ULONG_MAX, (void *)LONG_MIN, (void *)-1, (void *)-2352);
+	printf("%10p, %10p, %10p, %10p, %10p, %10p\n", (void *)0, (void *)0xABCDE, (void *)ULONG_MAX, (void *)LONG_MIN, (void *)-1, (void *)-2352);
 }
-*/

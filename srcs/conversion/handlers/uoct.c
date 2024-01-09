@@ -6,7 +6,7 @@
 /*   By: tgrekov <tgrekov@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 06:59:50 by tgrekov           #+#    #+#             */
-/*   Updated: 2023/12/21 07:36:03 by tgrekov          ###   ########.fr       */
+/*   Updated: 2024/01/04 17:18:37 by tgrekov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,15 +45,14 @@ static int	left_subspec(t_subspec subspec,
 	if (subspec.min_width && !subspec.left_justify && subspec.pad_str[0] == ' '
 		&& !wrap_err(repeat_str_n(subspec.pad_str, pad_n, fd), &res))
 		return (-1);
-	if (subspec.forced_sign
-		&& !wrap_err(write(fd, subspec.forced_sign, 1), &res))
-		return (-1);
 	if (subspec.min_width && !subspec.left_justify && subspec.pad_str[0] == '0'
 		&& !wrap_err(repeat_str_n(subspec.pad_str, pad_n, fd), &res))
 		return (-1);
+	if (subspec.force_decimal && n && !wrap_err(write(fd, "0", 1), &res))
+		return (-1);
 	if (subspec.precision > 0)
 		wrap_err(repeat_str_n("0000000000", subspec.precision
-				- ull_len_base(n, 8), fd), &res);
+				- ull_len_base(n, 8) - (subspec.force_decimal && n), fd), &res);
 	return (res);
 }
 
@@ -64,7 +63,7 @@ int	seq_uoct(va_list args, t_subspec subspec, int fd)
 	int					pad_n;
 
 	n = getarg(args, subspec);
-	pad_n = subspec.min_width - !!subspec.forced_sign;
+	pad_n = subspec.min_width - (subspec.force_decimal && n);
 	if (subspec.precision == -1)
 		pad_n -= ull_len_base(n, 8);
 	else if (subspec.precision)

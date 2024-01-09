@@ -6,7 +6,7 @@
 /*   By: tgrekov <tgrekov@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 07:07:16 by tgrekov           #+#    #+#             */
-/*   Updated: 2023/12/21 07:44:49 by tgrekov          ###   ########.fr       */
+/*   Updated: 2024/01/04 17:26:13 by tgrekov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static unsigned long long	getarg(va_list args, t_subspec subspec)
 }
 
 static int	left_subspec(t_subspec subspec,
-	unsigned long long n, int pad_n, int fd)
+	unsigned long long n, int pad_n, int upper, int fd)
 {
 	int	res;
 
@@ -45,11 +45,12 @@ static int	left_subspec(t_subspec subspec,
 	if (subspec.min_width && !subspec.left_justify && subspec.pad_str[0] == ' '
 		&& !wrap_err(repeat_str_n(subspec.pad_str, pad_n, fd), &res))
 		return (-1);
-	if (subspec.forced_sign
-		&& !wrap_err(write(fd, subspec.forced_sign, 1), &res))
-		return (-1);
 	if (subspec.min_width && !subspec.left_justify && subspec.pad_str[0] == '0'
 		&& !wrap_err(repeat_str_n(subspec.pad_str, pad_n, fd), &res))
+		return (-1);
+	if (subspec.force_decimal && n && (
+			(upper && !wrap_err(write(fd, "0X", 2), &res))
+			|| (!upper && !wrap_err(write(fd, "0x", 2), &res))))
 		return (-1);
 	if (subspec.precision > 0)
 		wrap_err(repeat_str_n("0000000000", subspec.precision
@@ -65,13 +66,13 @@ int	seq_uhex(va_list args, t_subspec subspec, int upper, int fd)
 	char				*base;
 
 	n = getarg(args, subspec);
-	pad_n = subspec.min_width - !!subspec.forced_sign;
+	pad_n = subspec.min_width - (subspec.force_decimal && n) * 2;
 	if (subspec.precision == -1)
 		pad_n -= ull_len_base(n, 16);
 	else if (subspec.precision)
 		pad_n -= max(ull_len_base(n, 16), subspec.precision);
 	res = 0;
-	if (!wrap_err(left_subspec(subspec, n, pad_n, fd), &res))
+	if (!wrap_err(left_subspec(subspec, n, pad_n, upper, fd), &res))
 		return (-1);
 	base = "0123456789abcdef";
 	if (upper)
