@@ -6,36 +6,37 @@
 /*   By: tgrekov <tgrekov@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 08:25:24 by tgrekov           #+#    #+#             */
-/*   Updated: 2024/01/09 18:12:19 by tgrekov          ###   ########.fr       */
+/*   Updated: 2024/01/16 02:48:50 by tgrekov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdarg.h>
 #include <unistd.h>
 #include "../subspec.h"
+#include "../sequence.h"
 #include "../../utils/utils.h"
 #include "../../../libft/libft.h"
+#include "../../utils/internal_types.h"
 
-int	seq_string(va_list args, t_subspec subspec, int fd)
+t_usmallest	process_string(t_sequence seq,
+	t_subspec subspec, int *fd, int total)
 {
-	char	*str;
-	size_t	len;
-	int		res;
+	(void) subspec;
+	(void) total;
+	return (write(*fd, (char *) seq.data, seq.total_len - seq.pad_len));
+}
 
-	res = 0;
-	str = va_arg(args, char *);
-	if (!str)
-		str = "(null)";
-	len = ft_strlen(str);
-	if (subspec.precision > -1 && (size_t) subspec.precision < len)
-		len = subspec.precision;
-	if ((size_t) subspec.min_width > len && !subspec.left_justify && !wrap_err(
-			repeat_str_n(subspec.pad_str, subspec.min_width - len, fd), &res))
-		return (-1);
-	if (!wrap_err(write(fd, str, len), &res))
-		return (-1);
-	if ((size_t) subspec.min_width > len && subspec.left_justify && !wrap_err(
-			repeat_str_n(subspec.pad_str, subspec.min_width - len, fd), &res))
-		return (-1);
-	return (res);
+t_sequence	pre_string(va_list args, t_sequence seq, t_subspec subspec)
+{
+	seq.data = (t_ubiggest) va_arg(args, char *);
+	if (!seq.data)
+		seq.data = (t_ubiggest) "(null)";
+	seq.total_len = (int) ft_strlen((char *) seq.data);
+	if (subspec.precision > -1 && subspec.precision < seq.total_len)
+		seq.total_len = subspec.precision;
+	if (subspec.min_width > seq.total_len)
+		seq.pad_len = subspec.min_width - seq.total_len;
+	seq.total_len += seq.pad_len;
+	seq.process = process_string;
+	return (seq);
 }

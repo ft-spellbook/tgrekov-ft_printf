@@ -6,13 +6,14 @@
 /*   By: tgrekov <tgrekov@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 23:03:16 by tgrekov           #+#    #+#             */
-/*   Updated: 2024/01/09 18:14:18 by tgrekov          ###   ########.fr       */
+/*   Updated: 2024/01/16 01:54:28 by tgrekov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/libft.h"
 #include "utils/utils.h"
-#include "conversion/handlers.h"
+
+int	handle_sequence(const char **format, va_list args, int *fd, int total);
 
 static void	do_segment(const char **format, va_list args, int *fd, int *total)
 {

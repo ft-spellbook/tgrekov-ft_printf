@@ -6,14 +6,17 @@
 /*   By: tgrekov <tgrekov@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 00:41:01 by tgrekov           #+#    #+#             */
-/*   Updated: 2024/01/04 17:14:51 by tgrekov          ###   ########.fr       */
+/*   Updated: 2024/01/16 02:13:35 by tgrekov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdarg.h>
-#include "handlers.h"
+#include "sequence.h"
+#include "subspec.h"
 #include "../utils/utils.h"
 #include "../../libft/libft.h"
+
+t_sequence	identify_sequence(char specifier, va_list args, t_subspec subspec);
 
 static void	init_subspec(t_subspec *subspec)
 {
@@ -96,11 +99,26 @@ static void	parse_subspec(const char **format, t_subspec *subspec, va_list args)
 int	handle_sequence(const char **format, va_list args, int *fd, int total)
 {
 	t_subspec	subspec;
+	t_sequence	seq;
 	int			res;
 
 	init_subspec(&subspec);
 	parse_subspec(format, &subspec, args);
-	res = identify_sequence(format, args, subspec, fd, total);
+	seq = identify_sequence(**format, args, subspec);
+	res = 0;
+	if (seq.pad_len && !subspec.left_justify && subspec.pad_str[0] != '0'
+		&& !wrap_err(repeat_str_n(subspec.pad_str, seq.pad_len, *fd), &res))
+		return (-1);
+	if (seq.sign && !wrap_err(write(*fd, &seq.sign, 1), &res))
+		return (-1);
+	if (seq.pad_len && !subspec.left_justify && subspec.pad_str[0] == '0'
+		&& !wrap_err(repeat_str_n(subspec.pad_str, seq.pad_len, *fd), &res))
+		return (-1);
+	if (!wrap_err(seq.process(seq, subspec, fd, total + res), &res))
+		return (-1);
+	if (seq.pad_len && subspec.left_justify
+		&& !wrap_err(repeat_str_n(subspec.pad_str, seq.pad_len, *fd), &res))
+		return (-1);
 	(*format)++;
 	return (res);
 }

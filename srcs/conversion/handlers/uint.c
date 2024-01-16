@@ -6,7 +6,7 @@
 /*   By: tgrekov <tgrekov@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 06:50:06 by tgrekov           #+#    #+#             */
-/*   Updated: 2023/12/21 07:32:05 by tgrekov          ###   ########.fr       */
+/*   Updated: 2024/01/16 03:29:08 by tgrekov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include "../subspec.h"
+#include "../sequence.h"
 #include "../../utils/utils.h"
 #include "../../utils/def_sub.h"
+#include "../../utils/internal_types.h"
 
 static unsigned long long	getarg(va_list args, t_subspec subspec)
 {
@@ -77,4 +79,38 @@ int	seq_uint(va_list args, t_subspec subspec, int fd)
 	if (subspec.min_width && subspec.left_justify)
 		wrap_err(repeat_str_n(subspec.pad_str, pad_n, fd), &res);
 	return (res);
+}
+
+t_usmallest	process_uint(t_sequence seq, t_subspec subspec, int *fd, int total)
+{
+	(void) total;
+	return (write(*fd, (char *) &seq.data, 1));
+}
+
+t_sequence	pre_uint(va_list args, t_sequence seq, t_subspec subspec)
+{
+	if (subspec.lenmod == hh)
+		seq.data = (unsigned char) va_arg(args, unsigned int);
+	else if (subspec.lenmod == h)
+		seq.data = (unsigned short) va_arg(args, unsigned int);
+	else if (subspec.lenmod == l)
+		seq.data = va_arg(args, unsigned long);
+	else if (subspec.lenmod == ll)
+		seq.data = va_arg(args, unsigned long long);
+	else if (subspec.lenmod == j)
+		seq.data = va_arg(args, uintmax_t);
+	else if (subspec.lenmod == z)
+		seq.data = va_arg(args, size_t);
+	else if (subspec.lenmod == t)
+		seq.data = va_arg(args, t_ptrdiff_t);
+	else
+		seq.data = va_arg(args, unsigned int);
+	seq.total_len = ull_len_base(seq.data, 10) + !!subspec.forced_sign;
+	if (subspec.min_width > seq.total_len)
+		seq.pad_len = subspec.min_width - seq.total_len;
+	seq.total_len += seq.pad_len;
+	if (subspec.forced_sign)
+		seq.sign = subspec.forced_sign;
+	seq.process = process_uint;
+	return (seq);
 }

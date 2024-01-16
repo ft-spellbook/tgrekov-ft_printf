@@ -6,29 +6,29 @@
 /*   By: tgrekov <tgrekov@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 00:22:38 by tgrekov           #+#    #+#             */
-/*   Updated: 2024/01/09 18:06:57 by tgrekov          ###   ########.fr       */
+/*   Updated: 2024/01/16 02:46:17 by tgrekov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdarg.h>
 #include <unistd.h>
 #include "../subspec.h"
+#include "../sequence.h"
 #include "../../utils/utils.h"
+#include "../../utils/internal_types.h"
 
-int	seq_char(va_list args, t_subspec subspec, int fd)
+t_usmallest	process_char(t_sequence seq, t_subspec subspec, int *fd, int total)
 {
-	char	c;
-	int		res;
+	(void) total;
+	return (write(*fd, (char *) &seq.data, 1));
+}
 
-	res = 0;
-	c = (char) va_arg(args, int);
-	if (subspec.min_width > 1 && !subspec.left_justify && !wrap_err(
-			repeat_str_n(subspec.pad_str, subspec.min_width - 1, fd), &res))
-		return (-1);
-	if (!wrap_err(write(fd, &c, 1), &res))
-		return (-1);
-	if (subspec.min_width > 1 && subspec.left_justify && !wrap_err(
-			repeat_str_n(subspec.pad_str, subspec.min_width - 1, fd), &res))
-		return (-1);
-	return (res);
+t_sequence	pre_char(va_list args, t_sequence seq, t_subspec subspec)
+{
+	seq.data = (t_ubiggest) va_arg(args, int);
+	if (subspec.min_width > 1)
+		seq.pad_len = subspec.min_width - 1;
+	seq.total_len = seq.pad_len + 1;
+	seq.process = process_char;
+	return (seq);
 }

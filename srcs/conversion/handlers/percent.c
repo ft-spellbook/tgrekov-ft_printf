@@ -6,13 +6,23 @@
 /*   By: tgrekov <tgrekov@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 11:36:38 by tgrekov           #+#    #+#             */
-/*   Updated: 2023/12/20 19:22:49 by tgrekov          ###   ########.fr       */
+/*   Updated: 2024/01/16 02:46:24 by tgrekov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
+#include "../subspec.h"
+#include "../sequence.h"
+#include "../../utils/internal_types.h"
 
-int	seq_percent(int fd)
+t_usmallest	process_char(t_sequence seq, t_subspec subspec, int *fd, int total);
+
+t_sequence	pre_percent(va_list args, t_sequence seq, t_subspec subspec)
 {
-	return (write(fd, "%", 1));
+	seq.data = (t_ubiggest) '%';
+	if (subspec.min_width > 1)
+		seq.pad_len = subspec.min_width - 1;
+	seq.total_len = seq.pad_len + 1;
+	seq.process = process_char;
+	return (seq);
 }

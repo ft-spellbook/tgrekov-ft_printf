@@ -6,36 +6,49 @@
 /*   By: tgrekov <tgrekov@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 03:41:27 by tgrekov           #+#    #+#             */
-/*   Updated: 2024/01/09 17:44:42 by tgrekov          ###   ########.fr       */
+/*   Updated: 2024/01/16 01:42:33 by tgrekov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "handlers.h"
+#include "handlers/handlers.h"
+#include "sequence.h"
 
-int	identify_sequence(const char **format, va_list args,
-			t_subspec subspec, int *fd, int total)
+static t_sequence	init_sequence(char specifier)
 {
-	if (**format == 'd' || **format == 'i')
-		return (seq_int(args, subspec, *fd));
-	if (**format == 'u')
-		return (seq_uint(args, subspec, *fd));
-	if (**format == 'o')
-		return (seq_uoct(args, subspec, *fd));
-	if (**format == 'x' || **format == 'X')
-		return (seq_uhex(args, subspec, **format == 'X', *fd));
-	if (**format == 'c')
-		return (seq_char(args, subspec, *fd));
-	if (**format == 's')
-		return (seq_string(args, subspec, *fd));
-	if (**format == 'p')
-		return (seq_pointer(args, *fd));
-	if (**format == '%')
-		return (seq_percent(*fd));
-	if (**format == 'n')
-		return (seq_store(args, subspec, total));
-	if (**format == '>')
-		return (seq_set_fd(args, fd));
-	if (**format == '{')
-		return (seq_ft_lst(args, subspec, *fd));
-	return (-1);
+	t_sequence	sequence;
+
+	sequence.specifier = specifier;
+	sequence.sign = 0;
+	sequence.total_len = 0;
+	sequence.pad_len = 0;
+	return (sequence);
+}
+
+t_sequence	identify_sequence(char specifier, va_list args, t_subspec subspec)
+{
+	t_sequence	sequence;
+
+	sequence = init_sequence(specifier);
+	if (specifier == 'd' || specifier == 'i')
+		return (pre_int(args, sequence, subspec));
+	if (specifier == 'u')
+		return (pre_uint(args, sequence, subspec));
+	if (specifier == 'o')
+		return (pre_uoct(args, sequence, subspec));
+	if (specifier == 'x' || specifier == 'X')
+		return (pre_uhex(args, sequence, subspec));
+	if (specifier == 'c')
+		return (pre_char(args, sequence, subspec));
+	if (specifier == 's')
+		return (pre_string(args, sequence, subspec));
+	if (specifier == 'p')
+		return (pre_pointer(args, sequence, subspec));
+	if (specifier == '%')
+		return (pre_percent(args, sequence, subspec));
+	if (specifier == 'n')
+		return (pre_store(args, sequence, subspec));
+	if (specifier == '>')
+		return (pre_set_fd(args, sequence, subspec));
+	sequence.specifier = 0;
+	return (sequence);
 }
