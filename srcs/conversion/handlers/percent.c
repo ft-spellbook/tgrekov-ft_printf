@@ -6,23 +6,22 @@
 /*   By: tgrekov <tgrekov@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 11:36:38 by tgrekov           #+#    #+#             */
-/*   Updated: 2024/01/16 02:46:24 by tgrekov          ###   ########.fr       */
+/*   Updated: 2024/01/31 04:50:20 by tgrekov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdarg.h>
 #include <unistd.h>
 #include "../subspec.h"
 #include "../sequence.h"
 #include "../../utils/internal_types.h"
 
-t_usmallest	process_char(t_sequence seq, t_subspec subspec, int *fd, int total);
+t_usmallest	process_char(t_sequence seq, int *fd, int total);
 
-t_sequence	pre_percent(va_list args, t_sequence seq, t_subspec subspec)
+void	pre_percent(va_list args, t_sequence *seq)
 {
-	seq.data = (t_ubiggest) '%';
-	if (subspec.min_width > 1)
-		seq.pad_len = subspec.min_width - 1;
-	seq.total_len = seq.pad_len + 1;
-	seq.process = process_char;
-	return (seq);
+	(void) args;
+	seq->data = (t_ubiggest) '%';
+	seq->total_len = 1;
+	seq->process = process_char;
 }

@@ -6,7 +6,7 @@
 /*   By: tgrekov <tgrekov@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 08:25:24 by tgrekov           #+#    #+#             */
-/*   Updated: 2024/01/16 02:48:50 by tgrekov          ###   ########.fr       */
+/*   Updated: 2024/01/31 04:49:12 by tgrekov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,25 +18,19 @@
 #include "../../../libft/libft.h"
 #include "../../utils/internal_types.h"
 
-t_usmallest	process_string(t_sequence seq,
-	t_subspec subspec, int *fd, int total)
+t_usmallest	process_string(t_sequence seq, int *fd, int total)
 {
-	(void) subspec;
 	(void) total;
 	return (write(*fd, (char *) seq.data, seq.total_len - seq.pad_len));
 }
 
-t_sequence	pre_string(va_list args, t_sequence seq, t_subspec subspec)
+void	pre_string(va_list args, t_sequence *seq)
 {
-	seq.data = (t_ubiggest) va_arg(args, char *);
-	if (!seq.data)
-		seq.data = (t_ubiggest) "(null)";
-	seq.total_len = (int) ft_strlen((char *) seq.data);
-	if (subspec.precision > -1 && subspec.precision < seq.total_len)
-		seq.total_len = subspec.precision;
-	if (subspec.min_width > seq.total_len)
-		seq.pad_len = subspec.min_width - seq.total_len;
-	seq.total_len += seq.pad_len;
-	seq.process = process_string;
-	return (seq);
+	seq->data = (t_ubiggest) va_arg(args, char *);
+	if (!seq->data)
+		seq->data = (t_ubiggest) "(null)";
+	seq->total_len = (int) ft_strlen((char *) seq->data);
+	if (seq->subspec.precision > -1 && seq->subspec.precision < seq->total_len)
+		seq->total_len = seq->subspec.precision;
+	seq->process = process_string;
 }

@@ -30,8 +30,8 @@ SRC_NAMES =	ft_printf						\
 			utils/max						\
 			conversion/handle_sequence		\
 			conversion/identify_sequence	\
+			conversion/parse_subspec		\
 			conversion/handlers/char		\
-			conversion/handlers/ft_lst		\
 			conversion/handlers/int			\
 			conversion/handlers/percent		\
 			conversion/handlers/pointer		\
@@ -43,10 +43,12 @@ SRC_NAMES =	ft_printf						\
 			conversion/handlers/uoct
 
 #List of headers
-HEADER_NAMES =	printf.h					\
-				utils/utils.h				\
-				utils/def_sub.h				\
-				conversion/handlers.h		\
+HEADER_NAMES =	printf.h						\
+				utils/utils.h					\
+				utils/def_sub.h					\
+				utils/internal_types.h			\
+				conversion/handlers/handlers.h	\
+				conversion/sequence.h			\
 				conversion/subspec.h
 
 #### END OF CONFIGURABLE SECTION ####

@@ -6,7 +6,7 @@
 /*   By: tgrekov <tgrekov@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 19:20:17 by tgrekov           #+#    #+#             */
-/*   Updated: 2023/12/21 05:36:14 by tgrekov          ###   ########.fr       */
+/*   Updated: 2024/01/31 04:35:35 by tgrekov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,6 @@ typedef struct s_subspec
 	int			min_width;
 	int			precision;
 	t_lenmod	lenmod;
-}		t_subspec;
+}	t_subspec;
 
 #endif

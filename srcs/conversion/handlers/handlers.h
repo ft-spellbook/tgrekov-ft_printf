@@ -6,7 +6,7 @@
 /*   By: tgrekov <tgrekov@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 00:29:00 by tgrekov           #+#    #+#             */
-/*   Updated: 2024/01/16 01:50:04 by tgrekov          ###   ########.fr       */
+/*   Updated: 2024/01/31 04:42:20 by tgrekov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,15 @@
 # include "../sequence.h"
 # include "../subspec.h"
 
-t_sequence	pre_char(va_list args, t_sequence sequence, t_subspec subspec);
-t_sequence	pre_int(va_list args, t_sequence sequence, t_subspec subspec);
-t_sequence	pre_percent(va_list args, t_sequence sequence, t_subspec subspec);
-t_sequence	pre_pointer(va_list args, t_sequence sequence, t_subspec subspec);
-t_sequence	pre_set_fd(va_list args, t_sequence sequence, t_subspec subspec);
-t_sequence	pre_store(va_list args, t_sequence sequence, t_subspec subspec);
-t_sequence	pre_string(va_list args, t_sequence sequence, t_subspec subspec);
-t_sequence	pre_uhex(va_list args, t_sequence sequence, t_subspec subspec);
-t_sequence	pre_uint(va_list args, t_sequence sequence, t_subspec subspec);
-t_sequence	pre_uoct(va_list args, t_sequence sequence, t_subspec subspec);
+void	pre_char(va_list args, t_sequence *seq);
+void	pre_int(va_list args, t_sequence *seq);
+void	pre_percent(va_list args, t_sequence *seq);
+void	pre_ptr(va_list args, t_sequence *seq);
+void	pre_set_fd(va_list args, t_sequence *seq);
+void	pre_store(va_list args, t_sequence *seq);
+void	pre_string(va_list args, t_sequence *seq);
+void	pre_uhex(va_list args, t_sequence *seq);
+void	pre_uint(va_list args, t_sequence *seq);
+void	pre_uoct(va_list args, t_sequence *seq);
 
 #endif

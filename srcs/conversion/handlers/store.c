@@ -6,7 +6,7 @@
 /*   By: tgrekov <tgrekov@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 18:18:34 by tgrekov           #+#    #+#             */
-/*   Updated: 2024/01/16 02:36:02 by tgrekov          ###   ########.fr       */
+/*   Updated: 2024/01/31 04:48:58 by tgrekov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,45 +17,45 @@
 #include "../../utils/def_sub.h"
 #include "../../utils/internal_types.h"
 
-t_usmallest	process_store(t_sequence seq, t_subspec subspec, int *fd, int total)
+t_usmallest	process_store(t_sequence seq, int *fd, int total)
 {
-	if (subspec.lenmod == hh)
+	(void) fd;
+	if (seq.subspec.lenmod == hh)
 		*((signed char *) seq.data) = total;
-	else if (subspec.lenmod == h)
+	else if (seq.subspec.lenmod == h)
 		*((short *) seq.data) = total;
-	else if (subspec.lenmod == l)
+	else if (seq.subspec.lenmod == l)
 		*((long *) seq.data) = total;
-	else if (subspec.lenmod == ll)
+	else if (seq.subspec.lenmod == ll)
 		*((long long *) seq.data) = total;
-	else if (subspec.lenmod == j)
+	else if (seq.subspec.lenmod == j)
 		*((intmax_t *) seq.data) = total;
-	else if (subspec.lenmod == z)
+	else if (seq.subspec.lenmod == z)
 		*((size_t *) seq.data) = total;
-	else if (subspec.lenmod == t)
+	else if (seq.subspec.lenmod == t)
 		*((t_ptrdiff_t *) seq.data) = total;
 	else
 		*((int *) seq.data) = total;
 	return (0);
 }
 
-t_sequence	pre_store(va_list args, t_sequence seq, t_subspec subspec)
+void	pre_store(va_list args, t_sequence *seq)
 {
-	if (subspec.lenmod == hh)
-		seq.data = (t_ubiggest) va_arg(args, int *);
-	else if (subspec.lenmod == h)
-		seq.data = (t_ubiggest) va_arg(args, int *);
-	else if (subspec.lenmod == l)
-		seq.data = (t_ubiggest) va_arg(args, long *);
-	else if (subspec.lenmod == ll)
-		seq.data = (t_ubiggest) va_arg(args, long long *);
-	else if (subspec.lenmod == j)
-		seq.data = (t_ubiggest) va_arg(args, intmax_t *);
-	else if (subspec.lenmod == z)
-		seq.data = (t_ubiggest) va_arg(args, size_t *);
-	else if (subspec.lenmod == t)
-		seq.data = (t_ubiggest) va_arg(args, t_ptrdiff_t *);
+	if (seq->subspec.lenmod == hh)
+		seq->data = (t_ubiggest) va_arg(args, int *);
+	else if (seq->subspec.lenmod == h)
+		seq->data = (t_ubiggest) va_arg(args, int *);
+	else if (seq->subspec.lenmod == l)
+		seq->data = (t_ubiggest) va_arg(args, long *);
+	else if (seq->subspec.lenmod == ll)
+		seq->data = (t_ubiggest) va_arg(args, long long *);
+	else if (seq->subspec.lenmod == j)
+		seq->data = (t_ubiggest) va_arg(args, intmax_t *);
+	else if (seq->subspec.lenmod == z)
+		seq->data = (t_ubiggest) va_arg(args, size_t *);
+	else if (seq->subspec.lenmod == t)
+		seq->data = (t_ubiggest) va_arg(args, t_ptrdiff_t *);
 	else
-		seq.data = (t_ubiggest) va_arg(args, int *);
-	seq.process = process_store;
-	return (seq);
+		seq->data = (t_ubiggest) va_arg(args, int *);
+	seq->process = process_store;
 }
