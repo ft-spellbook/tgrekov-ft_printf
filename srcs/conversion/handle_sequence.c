@@ -6,13 +6,12 @@
 /*   By: tgrekov <tgrekov@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 00:41:01 by tgrekov           #+#    #+#             */
-/*   Updated: 2024/01/31 04:54:42 by tgrekov          ###   ########.fr       */
+/*   Updated: 2024/02/02 02:51:01 by tgrekov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdarg.h>
 #include "sequence.h"
-#include "subspec.h"
 #include "../utils/utils.h"
 #include "../../libft/libft.h"
 

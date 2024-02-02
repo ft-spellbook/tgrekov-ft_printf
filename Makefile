@@ -22,34 +22,36 @@ OBJ_DIR = $(OBJ_BASE_DIR)standard/
 DEBUG_OBJ_DIR = $(OBJ_BASE_DIR)debug/
 
 #List of source files
-SRC_NAMES =	ft_printf						\
-			utils/ull_len_base				\
-			utils/putbase					\
-			utils/repeat_str_n				\
-			utils/wrap_err					\
-			utils/max						\
-			conversion/handle_sequence		\
-			conversion/identify_sequence	\
-			conversion/parse_subspec		\
-			conversion/handlers/char		\
-			conversion/handlers/int			\
-			conversion/handlers/percent		\
-			conversion/handlers/pointer		\
-			conversion/handlers/set_fd		\
-			conversion/handlers/store		\
-			conversion/handlers/string		\
-			conversion/handlers/uhex		\
-			conversion/handlers/uint		\
-			conversion/handlers/uoct
+SRC_NAMES =	ft_printf									\
+			utils/ull_len_base							\
+			utils/putbase								\
+			utils/repeat_str_n							\
+			utils/wrap_err								\
+			conversion/handle_sequence					\
+			conversion/identify_sequence				\
+			conversion/parse_subspec					\
+			conversion/handlers/char					\
+			conversion/handlers/int						\
+			conversion/handlers/percent					\
+			conversion/handlers/pointer					\
+			conversion/handlers/set_fd					\
+			conversion/handlers/store					\
+			conversion/handlers/string					\
+			conversion/handlers/uhex					\
+			conversion/handlers/uint					\
+			conversion/handlers/uoct					\
+			conversion/handlers/utils/unsigned_arg		\
+			conversion/handlers/utils/print_uint_base	\
 
 #List of headers
-HEADER_NAMES =	printf.h						\
-				utils/utils.h					\
-				utils/def_sub.h					\
-				utils/internal_types.h			\
-				conversion/handlers/handlers.h	\
-				conversion/sequence.h			\
-				conversion/subspec.h
+HEADER_NAMES =	printf.h									\
+				utils/utils.h								\
+				utils/def_sub.h								\
+				utils/internal_types.h						\
+				conversion/sequence.h						\
+				conversion/subspec.h						\
+				conversion/handlers/handlers.h				\
+				conversion/handlers/utils/handler_utils.h	\
 
 #### END OF CONFIGURABLE SECTION ####
 

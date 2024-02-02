@@ -1,18 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   max.c                                              :+:      :+:    :+:   */
+/*   handler_utils.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tgrekov <tgrekov@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/21 04:54:00 by tgrekov           #+#    #+#             */
-/*   Updated: 2023/12/21 04:54:39 by tgrekov          ###   ########.fr       */
+/*   Created: 2024/02/02 02:37:35 by tgrekov           #+#    #+#             */
+/*   Updated: 2024/02/02 02:45:48 by tgrekov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	max(int a, int b)
-{
-	if (a > b)
-		return (a);
-	return (b);
-}
+#ifndef HANDLER_UTILS_H
+# define HANDLER_UTILS_H
+
+# include <stdarg.h>
+# include "../../../utils/internal_types.h"
+# include "../../sequence.h"
+
+t_ubiggest	unsigned_arg(va_list args, t_lenmod lenmod);
+t_usmallest	print_uint_base(t_sequence seq, int fd, char *base);
+
+#endif

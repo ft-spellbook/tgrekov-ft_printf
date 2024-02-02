@@ -6,15 +6,13 @@
 /*   By: tgrekov <tgrekov@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 08:25:24 by tgrekov           #+#    #+#             */
-/*   Updated: 2024/01/31 04:49:12 by tgrekov          ###   ########.fr       */
+/*   Updated: 2024/02/02 02:47:46 by tgrekov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdarg.h>
 #include <unistd.h>
-#include "../subspec.h"
 #include "../sequence.h"
-#include "../../utils/utils.h"
 #include "../../../libft/libft.h"
 #include "../../utils/internal_types.h"
 
