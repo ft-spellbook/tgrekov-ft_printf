@@ -6,17 +6,18 @@
 /*   By: tgrekov <tgrekov@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 18:18:34 by tgrekov           #+#    #+#             */
-/*   Updated: 2024/02/02 02:48:36 by tgrekov          ###   ########.fr       */
+/*   Updated: 2024/02/02 03:56:52 by tgrekov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdarg.h>
+#include <unistd.h>
 #include <stdlib.h>
 #include "../sequence.h"
 #include "../../utils/def_sub.h"
 #include "../../utils/internal_types.h"
 
-t_usmallest	process_store(t_sequence seq, int *fd, int total)
+int	process_store(t_sequence seq, int *fd, int total)
 {
 	(void) fd;
 	if (seq.subspec.lenmod == hh)

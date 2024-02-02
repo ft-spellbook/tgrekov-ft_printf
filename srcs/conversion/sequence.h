@@ -6,13 +6,14 @@
 /*   By: tgrekov <tgrekov@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 19:46:53 by tgrekov           #+#    #+#             */
-/*   Updated: 2024/01/31 04:35:26 by tgrekov          ###   ########.fr       */
+/*   Updated: 2024/02/02 03:57:10 by tgrekov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SEQUENCE_H
 # define SEQUENCE_H
 
+# include <unistd.h>
 # include "subspec.h"
 # include "../utils/internal_types.h"
 
@@ -24,7 +25,7 @@ typedef struct s_sequence
 	t_ubiggest			data;
 	int					total_len;
 	int					pad_len;
-	t_usmallest			(*process)(struct s_sequence, int *, int);
+	int					(*process)(struct s_sequence, int *, int);
 }	t_sequence;
 
 #endif

@@ -6,16 +6,17 @@
 /*   By: tgrekov <tgrekov@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 02:31:45 by tgrekov           #+#    #+#             */
-/*   Updated: 2024/02/02 02:42:16 by tgrekov          ###   ########.fr       */
+/*   Updated: 2024/02/02 03:56:32 by tgrekov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <unistd.h>
 #include "../../sequence.h"
 #include "../../../utils/utils.h"
 #include "../../../utils/internal_types.h"
 #include "../../../../libft/libft.h"
 
-t_usmallest	print_uint_base(t_sequence seq, int fd, char *base)
+int	print_uint_base(t_sequence seq, int fd, char *base)
 {
 	int	res;
 

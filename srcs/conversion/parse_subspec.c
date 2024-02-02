@@ -6,7 +6,7 @@
 /*   By: tgrekov <tgrekov@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 17:52:45 by tgrekov           #+#    #+#             */
-/*   Updated: 2024/01/31 03:23:21 by tgrekov          ###   ########.fr       */
+/*   Updated: 2024/02/02 03:36:37 by tgrekov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ static int	subspec_parse_width_or_precision(const char **format, va_list args)
 		return (va_arg(args, int));
 	}
 	res = ft_atoi(*format);
-	if (ft_isdigit(**format))
-		*format += ull_len_base(res, 10);
+	while (ft_isdigit(**format))
+		(*format)++;
 	return (res);
 }
 
@@ -77,7 +77,7 @@ void	parse_subspec(const char **format, t_subspec *subspec, va_list args)
 			subspec->forced_sign = " ";
 		else if (**format == '#')
 			subspec->force_decimal = 1;
-		else if (**format == '0')
+		else if (**format == '0' && !subspec->left_justify)
 			subspec->pad_str = "0000000000";
 		else if (**format == '_')
 			subspec->pad_str = va_arg(args, char *);

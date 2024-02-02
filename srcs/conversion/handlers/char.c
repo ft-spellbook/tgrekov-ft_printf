@@ -6,7 +6,7 @@
 /*   By: tgrekov <tgrekov@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 00:22:38 by tgrekov           #+#    #+#             */
-/*   Updated: 2024/02/02 02:50:38 by tgrekov          ###   ########.fr       */
+/*   Updated: 2024/02/02 03:56:57 by tgrekov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "../sequence.h"
 #include "../../utils/internal_types.h"
 
-t_usmallest	process_char(t_sequence seq, int *fd, int total)
+int	process_char(t_sequence seq, int *fd, int total)
 {
 	(void) total;
 	return (write(*fd, (char *) &seq.data, 1));
