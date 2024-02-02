@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   putbase.c                                          :+:      :+:    :+:   */
+/*   u_put_base.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tgrekov <tgrekov@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 17:48:47 by tgrekov           #+#    #+#             */
-/*   Updated: 2024/02/02 03:56:30 by tgrekov          ###   ########.fr       */
+/*   Updated: 2024/02/02 04:17:40 by tgrekov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
-#include "def_sub.h"
+#include "internal_types.h"
 #include "../../libft/libft.h"
 
-static int	_putullbase(unsigned long long n,
+static int	_u_put_base(t_ubiggest n,
 	char *base, unsigned int base_len, int fd)
 {
 	int	res;
@@ -22,7 +22,7 @@ static int	_putullbase(unsigned long long n,
 	res = 0;
 	if (n > base_len - 1)
 	{
-		res = _putullbase(n / base_len, base, base_len, fd);
+		res = _u_put_base(n / base_len, base, base_len, fd);
 		if (res == -1)
 			return (-1);
 	}
@@ -31,7 +31,7 @@ static int	_putullbase(unsigned long long n,
 	return (res + 1);
 }
 
-int	putullbase(unsigned long long n, char *base, int fd)
+int	u_put_base(t_ubiggest n, char *base, int fd)
 {
-	return (_putullbase(n, base, ft_strlen(base), fd));
+	return (_u_put_base(n, base, ft_strlen(base), fd));
 }

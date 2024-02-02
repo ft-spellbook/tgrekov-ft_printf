@@ -6,7 +6,7 @@
 /*   By: tgrekov <tgrekov@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 23:03:16 by tgrekov           #+#    #+#             */
-/*   Updated: 2024/02/02 03:47:54 by tgrekov          ###   ########.fr       */
+/*   Updated: 2024/02/02 04:29:15 by tgrekov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,8 @@ int	ft_printf(const char *format, ...)
 }
 
 /*
-#include <stdio.h>
-#include <limits.h>
-
 int	main(void)
 {
 	ft_printf("%%");
-	//printf("%.03s\n", 0);
 }
 */

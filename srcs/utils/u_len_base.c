@@ -1,16 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ull_len_base.c                                     :+:      :+:    :+:   */
+/*   u_len_base.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tgrekov <tgrekov@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 17:31:15 by tgrekov           #+#    #+#             */
-/*   Updated: 2023/12/21 05:52:23 by tgrekov          ###   ########.fr       */
+/*   Updated: 2024/02/02 04:17:52 by tgrekov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ull_len_base(unsigned long long n, int base)
+#include "internal_types.h"
+
+int	u_len_base(t_ubiggest n, int base)
 {
 	int	len;
 

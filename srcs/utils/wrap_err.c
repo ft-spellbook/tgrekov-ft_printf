@@ -6,13 +6,13 @@
 /*   By: tgrekov <tgrekov@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 02:49:16 by tgrekov           #+#    #+#             */
-/*   Updated: 2024/02/02 03:53:29 by tgrekov          ###   ########.fr       */
+/*   Updated: 2024/02/02 04:18:01 by tgrekov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-ssize_t	wrap_err(int n, int *total)
+int	wrap_err(int n, int *total)
 {
 	if (n == -1)
 	{

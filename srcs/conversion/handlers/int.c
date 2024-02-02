@@ -6,7 +6,7 @@
 /*   By: tgrekov <tgrekov@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 05:18:23 by tgrekov           #+#    #+#             */
-/*   Updated: 2024/02/02 03:56:56 by tgrekov          ###   ########.fr       */
+/*   Updated: 2024/02/02 04:20:22 by tgrekov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,11 @@
 #include <stdlib.h>
 #include "../sequence.h"
 #include "../../utils/utils.h"
-#include "../../utils/def_sub.h"
 #include "../../utils/internal_types.h"
 
 int	process_uint(t_sequence seq, int *fd, int total);
 
-static long long	signed_arg(va_list args, t_sequence *seq)
+static t_biggest	signed_arg(va_list args, t_sequence *seq)
 {
 	if (seq->subspec.lenmod == hh)
 		return ((signed char) va_arg(args, int));
@@ -39,9 +38,9 @@ static long long	signed_arg(va_list args, t_sequence *seq)
 	return (va_arg(args, int));
 }
 
-static t_ubiggest	lltull(long long n)
+static t_ubiggest	lltull(t_biggest n)
 {
-	if (n == -LLONG_MAX - 1LL)
+	if (n == -T_BIGGEST_MAX - 1LL)
 		return ((t_ubiggest)(-(n + 1)) + 1ULL);
 	if (n < 0)
 		n = -n;
@@ -50,13 +49,13 @@ static t_ubiggest	lltull(long long n)
 
 void	pre_int(va_list args, t_sequence *seq)
 {
-	long long	n;
+	t_biggest	n;
 
 	n = signed_arg(args, seq);
 	if (n < 0)
 		seq->sign = "-";
 	seq->data = lltull(n);
-	seq->total_len = ull_len_base(seq->data, 10)
+	seq->total_len = u_len_base(seq->data, 10)
 		- (!seq->subspec.precision && !seq->data);
 	if (seq->subspec.precision > seq->total_len)
 		seq->total_len = seq->subspec.precision;

@@ -6,7 +6,7 @@
 /*   By: tgrekov <tgrekov@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 06:59:50 by tgrekov           #+#    #+#             */
-/*   Updated: 2024/02/02 03:56:47 by tgrekov          ###   ########.fr       */
+/*   Updated: 2024/02/02 04:21:22 by tgrekov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@
 int	process_uoct(t_sequence seq, int *fd, int total)
 {
 	(void) total;
-	return (print_uint_base(seq, *fd, "01234567"));
+	return (u_print_base(seq, *fd, "01234567"));
 }
 
 void	pre_uoct(va_list args, t_sequence *seq)
 {
 	seq->data = unsigned_arg(args, seq->subspec.lenmod);
-	seq->total_len = ull_len_base(seq->data, 8)
+	seq->total_len = u_len_base(seq->data, 8)
 		- (!seq->subspec.precision && !seq->data);
 	if (seq->subspec.precision > seq->total_len)
 		seq->total_len = seq->subspec.precision;

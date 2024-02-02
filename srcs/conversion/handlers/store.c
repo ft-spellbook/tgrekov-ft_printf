@@ -6,7 +6,7 @@
 /*   By: tgrekov <tgrekov@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 18:18:34 by tgrekov           #+#    #+#             */
-/*   Updated: 2024/02/02 03:56:52 by tgrekov          ###   ########.fr       */
+/*   Updated: 2024/02/02 04:13:19 by tgrekov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include "../sequence.h"
-#include "../../utils/def_sub.h"
 #include "../../utils/internal_types.h"
 
 int	process_store(t_sequence seq, int *fd, int total)

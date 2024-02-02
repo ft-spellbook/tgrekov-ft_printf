@@ -6,7 +6,7 @@
 /*   By: tgrekov <tgrekov@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 07:07:16 by tgrekov           #+#    #+#             */
-/*   Updated: 2024/02/02 03:56:49 by tgrekov          ###   ########.fr       */
+/*   Updated: 2024/02/02 04:20:59 by tgrekov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@ int	process_uhex(t_sequence seq, int *fd, int total)
 {
 	(void) total;
 	if (seq.specifier == 'X')
-		return (print_uint_base(seq, *fd, "0123456789ABCDEF"));
-	return (print_uint_base(seq, *fd, "0123456789abcdef"));
+		return (u_print_base(seq, *fd, "0123456789ABCDEF"));
+	return (u_print_base(seq, *fd, "0123456789abcdef"));
 }
 
 void	pre_uhex(va_list args, t_sequence *seq)
 {
 	seq->data = unsigned_arg(args, seq->subspec.lenmod);
-	seq->total_len = ull_len_base(seq->data, 16)
+	seq->total_len = u_len_base(seq->data, 16)
 		- (!seq->subspec.precision && !seq->data);
 	if (seq->subspec.precision > seq->total_len)
 		seq->total_len = seq->subspec.precision;

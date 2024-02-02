@@ -23,8 +23,8 @@ DEBUG_OBJ_DIR = $(OBJ_BASE_DIR)debug/
 
 #List of source files
 SRC_NAMES =	ft_printf									\
-			utils/ull_len_base							\
-			utils/putbase								\
+			utils/u_len_base							\
+			utils/u_put_base							\
 			utils/repeat_str_n							\
 			utils/wrap_err								\
 			conversion/handle_sequence					\
@@ -41,12 +41,11 @@ SRC_NAMES =	ft_printf									\
 			conversion/handlers/uint					\
 			conversion/handlers/uoct					\
 			conversion/handlers/utils/unsigned_arg		\
-			conversion/handlers/utils/print_uint_base	\
+			conversion/handlers/utils/u_print_base
 
 #List of headers
 HEADER_NAMES =	printf.h									\
 				utils/utils.h								\
-				utils/def_sub.h								\
 				utils/internal_types.h						\
 				conversion/sequence.h						\
 				conversion/subspec.h						\
