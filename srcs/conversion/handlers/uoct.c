@@ -6,7 +6,7 @@
 /*   By: tgrekov <tgrekov@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 06:59:50 by tgrekov           #+#    #+#             */
-/*   Updated: 2024/02/02 04:21:22 by tgrekov          ###   ########.fr       */
+/*   Updated: 2024/02/02 04:31:27 by tgrekov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include "../../utils/internal_types.h"
 #include "utils/handler_utils.h"
 
-int	process_uoct(t_sequence seq, int *fd, int total)
+static int	process_uoct(t_sequence seq, int *fd, int total)
 {
 	(void) total;
 	return (u_print_base(seq, *fd, "01234567"));

@@ -6,7 +6,7 @@
 /*   By: tgrekov <tgrekov@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 17:58:03 by tgrekov           #+#    #+#             */
-/*   Updated: 2024/02/02 03:56:53 by tgrekov          ###   ########.fr       */
+/*   Updated: 2024/02/02 04:30:59 by tgrekov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "../sequence.h"
 #include "../../utils/internal_types.h"
 
-int	process_set_fd(t_sequence seq, int *fd, int total)
+static int	process_set_fd(t_sequence seq, int *fd, int total)
 {
 	(void) total;
 	*fd = (int) seq.data;

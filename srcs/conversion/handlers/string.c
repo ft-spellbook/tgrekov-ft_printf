@@ -6,7 +6,7 @@
 /*   By: tgrekov <tgrekov@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 08:25:24 by tgrekov           #+#    #+#             */
-/*   Updated: 2024/02/02 03:56:50 by tgrekov          ###   ########.fr       */
+/*   Updated: 2024/02/02 04:31:13 by tgrekov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "../../../libft/libft.h"
 #include "../../utils/internal_types.h"
 
-int	process_string(t_sequence seq, int *fd, int total)
+static int	process_string(t_sequence seq, int *fd, int total)
 {
 	(void) total;
 	return (write(*fd, (char *) seq.data, seq.total_len - seq.pad_len));
