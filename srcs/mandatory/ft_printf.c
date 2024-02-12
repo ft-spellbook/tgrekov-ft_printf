@@ -6,11 +6,11 @@
 /*   By: tgrekov <tgrekov@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 23:03:16 by tgrekov           #+#    #+#             */
-/*   Updated: 2024/02/02 04:49:39 by tgrekov          ###   ########.fr       */
+/*   Updated: 2024/02/12 06:35:32 by tgrekov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/libft.h"
+#include "../../libft/libft.h"
 #include "utils/utils.h"
 #include <stdarg.h>
 
@@ -52,12 +52,4 @@ int	ft_printf(const char *format, ...)
 		do_segment(&format, args, &fd, &total);
 	va_end(args);
 	return (total);
-}
-
-#include <stdio.h>
-
-int	main(void)
-{
-	printf("Test%n\n", 0);
-	ft_printf("2Test\n");
 }

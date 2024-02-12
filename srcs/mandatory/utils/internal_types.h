@@ -1,20 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   internal_types.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tgrekov <tgrekov@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/31 23:08:39 by tgrekov           #+#    #+#             */
-/*   Updated: 2023/12/20 19:50:38 by tgrekov          ###   ########.fr       */
+/*   Created: 2024/01/09 20:40:21 by tgrekov           #+#    #+#             */
+/*   Updated: 2024/02/12 00:46:09 by tgrekov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#ifndef INTERNAL_TYPES_H
+# define INTERNAL_TYPES_H
 
-# include <stdarg.h>
-
-int	ft_printf(const char *format, ...) __attribute__((format(printf, 1, 2)));
+typedef long			t_biggest;
+typedef unsigned long	t_ubiggest;
 
 #endif

@@ -6,14 +6,14 @@
 /*   By: tgrekov <tgrekov@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 17:52:45 by tgrekov           #+#    #+#             */
-/*   Updated: 2024/02/02 03:36:37 by tgrekov          ###   ########.fr       */
+/*   Updated: 2024/02/12 06:36:32 by tgrekov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdarg.h>
 #include "subspec.h"
 #include "../utils/utils.h"
-#include "../../libft/libft.h"
+#include "../../../libft/libft.h"
 
 void	init_subspec(t_subspec *subspec)
 {

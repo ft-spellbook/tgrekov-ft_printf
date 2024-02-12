@@ -6,7 +6,7 @@
 /*   By: tgrekov <tgrekov@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 02:31:45 by tgrekov           #+#    #+#             */
-/*   Updated: 2024/02/02 04:19:42 by tgrekov          ###   ########.fr       */
+/*   Updated: 2024/02/12 06:36:41 by tgrekov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "../../sequence.h"
 #include "../../../utils/utils.h"
 #include "../../../utils/internal_types.h"
-#include "../../../../libft/libft.h"
+#include "../../../../../libft/libft.h"
 
 int	u_print_base(t_sequence seq, int fd, char *base)
 {

@@ -1,37 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   u_put_base.c                                       :+:      :+:    :+:   */
+/*   repeat_str_n.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tgrekov <tgrekov@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/20 17:48:47 by tgrekov           #+#    #+#             */
-/*   Updated: 2024/02/02 04:17:40 by tgrekov          ###   ########.fr       */
+/*   Created: 2023/12/20 21:26:03 by tgrekov           #+#    #+#             */
+/*   Updated: 2024/02/12 06:36:15 by tgrekov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include "internal_types.h"
-#include "../../libft/libft.h"
+#include "../../../libft/libft.h"
 
-static int	_u_put_base(t_ubiggest n,
-	char *base, unsigned int base_len, int fd)
+static int	_repeat_str_n(const char *str, int n, int strlen, int fd)
 {
 	int	res;
+	int	res2;
 
 	res = 0;
-	if (n > base_len - 1)
+	if (n > strlen)
 	{
-		res = _u_put_base(n / base_len, base, base_len, fd);
+		res = _repeat_str_n(str, n - strlen, strlen, fd);
 		if (res == -1)
 			return (-1);
+		n = strlen;
 	}
-	if (write(fd, base + (n % base_len), 1) == -1)
+	res2 = write(fd, str, n);
+	if (res2 == -1)
 		return (-1);
-	return (res + 1);
+	return (res + res2);
 }
 
-int	u_put_base(t_ubiggest n, char *base, int fd)
+int	repeat_str_n(const char *str, int n, int fd)
 {
-	return (_u_put_base(n, base, ft_strlen(base), fd));
+	if (n < 1)
+		return (0);
+	return (_repeat_str_n(str, n, ft_strlen(str), fd));
 }

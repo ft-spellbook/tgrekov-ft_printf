@@ -1,103 +1,91 @@
-#Name of archive
 NAME = libftprintf.a
-LIBFT_NAME = libft.a
 LIBFT_DIR = libft/
-#Name of debugging executable
 DEBUG_NAME = debug.out
 
-#Compiler
 CC = cc
-#Compiler flags
 CFLAGS = -Wall -Wextra -Werror
-#Compiler flags to use for debugging
 DEBUG_FLAGS = -g -fsanitize=address,undefined,integer
 
-#Directory where source files are located
 SRC_DIR = srcs/
-#Directory for object subdirectories
-OBJ_BASE_DIR = objs/
-#Directory for objects from standard builds
-OBJ_DIR = $(OBJ_BASE_DIR)standard/
-#Directory for objects from debug builds
-DEBUG_OBJ_DIR = $(OBJ_BASE_DIR)debug/
+OBJ_DIR = objs/
 
-#List of source files
-SRC_NAMES =	ft_printf									\
-			utils/u_len_base							\
-			utils/u_put_base							\
-			utils/repeat_str_n							\
-			utils/wrap_err								\
-			conversion/handle_sequence					\
-			conversion/identify_sequence				\
-			conversion/parse_subspec					\
-			conversion/handlers/char					\
-			conversion/handlers/int						\
-			conversion/handlers/percent					\
-			conversion/handlers/pointer					\
-			conversion/handlers/set_fd					\
-			conversion/handlers/store					\
-			conversion/handlers/string					\
-			conversion/handlers/uhex					\
-			conversion/handlers/uint					\
-			conversion/handlers/uoct					\
-			conversion/handlers/utils/unsigned_arg		\
-			conversion/handlers/utils/u_print_base
+SRC_NAMES =	ft_printf.c						\
+			utils/u_len_base.c				\
+			utils/u_put_base.c				\
+			utils/wrap_err.c				\
+			conversion/handle_sequence.c	\
+			conversion/identify_sequence.c	\
+			conversion/handlers/char.c		\
+			conversion/handlers/int.c		\
+			conversion/handlers/percent.c	\
+			conversion/handlers/pointer.c	\
+			conversion/handlers/string.c	\
+			conversion/handlers/uhex.c		\
+			conversion/handlers/uint.c
 
-#List of headers
-HEADER_NAMES =	printf.h									\
-				utils/utils.h								\
-				utils/internal_types.h						\
-				conversion/sequence.h						\
-				conversion/subspec.h						\
-				conversion/handlers/handlers.h				\
-				conversion/handlers/utils/handler_utils.h	\
+HEADER_NAMES =	utils/utils.h					\
+				utils/internal_types.h			\
+				conversion/sequence.h			\
+				conversion/handlers/handlers.h
 
-#### END OF CONFIGURABLE SECTION ####
+SRC_BONUS_NAMES =	utils/repeat_str_n.c						\
+					conversion/handle_sequence.c				\
+					conversion/identify_sequence.c				\
+					conversion/parse_subspec.c					\
+					conversion/handlers/char.c					\
+					conversion/handlers/int.c					\
+					conversion/handlers/percent.c				\
+					conversion/handlers/pointer.c				\
+					conversion/handlers/set_fd.c				\
+					conversion/handlers/store.c					\
+					conversion/handlers/string.c				\
+					conversion/handlers/uhex.c					\
+					conversion/handlers/uint.c					\
+					conversion/handlers/uoct.c					\
+					conversion/handlers/utils/unsigned_arg.c	\
+					conversion/handlers/utils/u_print_base.c
 
-#Prepend SRC_DIR and append .c to all source files
-SRCS = $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_NAMES)))
-#Prepend OBJ_DIR and append .o to all would-be object files
-OBJS = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_NAMES)))
-#Prepend OBJ_DIR and append .o to all would-be debug object files
-DEBUG_OBJS = $(addprefix $(DEBUG_OBJ_DIR), $(addsuffix .o, $(SRC_NAMES)))
+HEADER_BONUS_NAMES =	utils/utils.h								\
+						utils/internal_types.h						\
+						conversion/sequence.h						\
+						conversion/subspec.h						\
+						conversion/handlers/handlers.h				\
+						conversion/handlers/utils/handler_utils.h
+
+################################################################################
+
+SRCS = $(addprefix $(SRC_DIR)mandatory/, $(SRC_NAMES))
+SRCS_BONUS = $(addprefix $(SRC_BONUS_DIR)bonus/, $(SRC_BONUS_NAMES))
+OBJS = $(SRC_NAMES:%.c=$(OBJ_DIR)mandatory/%.o)
+OBJS_BONUS = $(SRC_BONUS_NAMES:%.c=$(OBJ_DIR)bonus/%.o)
 
 HEADERS = $(addprefix $(SRC_DIR), $(HEADER_NAMES))
+HEADERS_BONUS = $(addprefix $(SRC_BONUS_DIR), $(HEADER_BONUS_NAMES))
 
-#Set non-filename targets so make doesn't skip due
-#to files unintentionally having the same name as a rule
-.PHONY: all \
+.PHONY: all bonus \
 debug_set debug \
-clean fclean re 
+clean fclean re
 
-# $@ name of the rule
-# $^ prerequisite of the rule
-# $< first prerequisite
-# Build any object files that need recompilation
-$(OBJ_DIR)%.o \
-$(DEBUG_OBJ_DIR)%.o: $(SRC_DIR)%.c
-#	Take the directory path of the file that needs to be built, remove
-#	the SRC_DIR portion and replace it with OBJ_DIR instead, and
-#	create that directory.
-
-#	We use $< so that we don't get the HEADERS here also. They are included
-#	above so modifying the headers can trigger recompilation
-	@mkdir -p $(OBJ_DIR)$(subst $(SRC_DIR),,$(dir $<))
+$(OBJ_DIR)%.o: $(subst debug/,,$(SRC_DIR)%.c)
+	@mkdir -p $(dir $@)
 	@echo Building $< with $(CFLAGS)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
-#Create archive from objects
 $(NAME): $(OBJS)
 	@make -C $(LIBFT_DIR)
-	@cp $(LIBFT_DIR)$(LIBFT_NAME) $(NAME)
+	@cp $(LIBFT_DIR)libft.a $(NAME)
 	@ar rcs $(NAME) $^
 	@echo Mandatory part done
 
 all: $(NAME)
 
-#Compile debug executable with debug flags
-$(DEBUG_NAME): $(DEBUG_OBJS)
+bonus: $(NAME) $(OBJS_BONUS)
+	@ar rcs $(NAME) $(OBJS_BONUS)
+	@echo Bonus part done
+
+$(DEBUG_NAME): $(OBJS_DEBUG)
 	@make -C $(LIBFT_DIR)
-	@cp $(LIBFT_DIR)$(LIBFT_NAME) $(NAME)
+	@cp $(LIBFT_DIR)$(libft.a) $(NAME)
 	@echo Compiling debug executable
 	@$(CC) $(CFLAGS) $(OBJS) $(NAME) -o $@
 	@echo Debug done
@@ -105,18 +93,16 @@ $(DEBUG_NAME): $(DEBUG_OBJS)
 #Set debug flags, debug object directory, and debug objects
 debug_set:
 	$(eval CFLAGS = $(DEBUG_FLAGS))
-	$(eval OBJ_DIR = $(DEBUG_OBJ_DIR))
-	$(eval OBJS = $(DEBUG_OBJS))
+	$(eval OBJ_DIR = $(OBJ_DEBUG_DIR))
+	$(eval OBJS = $(OBJS_DEBUG))
 
 debug: debug_set $(DEBUG_NAME)
-
-bonus: all
 
 #Clean up resources generated during build
 clean:
 	@make -C $(LIBFT_DIR) clean
-	@echo Removing $(OBJ_BASE_DIR) and .bonus
-	@rm -rf $(OBJ_BASE_DIR) .bonus
+	@echo Removing $(OBJ_DIR)
+	@rm -rf $(OBJ_DIR)
 
 #Clean up build artifacts
 fclean: clean
