@@ -6,7 +6,7 @@
 /*   By: tgrekov <tgrekov@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 02:37:35 by tgrekov           #+#    #+#             */
-/*   Updated: 2024/02/13 08:39:19 by tgrekov          ###   ########.fr       */
+/*   Updated: 2024/02/13 08:51:53 by tgrekov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@
  * @line /\* *********
  * @until /\* *********
  */
-
-#include
 
 #ifndef HANDLER_UTILS_H
 # define HANDLER_UTILS_H
