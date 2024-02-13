@@ -1,0 +1,19 @@
+/**
+ * @page project_summary Project Summary
+ * @htmlonly
+ * <div id="author_date">
+ * tgrekov 2024/02/13 2024/02/13
+ * </div>
+ * @endhtmlonly
+ *
+ * Due to the requirement to split bonus from mandatory, the file structure
+ * I ended up using for this project is slightly unusual, where the mandatory
+ * is intended to be built first, and the bonus only replaces what it has to,
+ * reusing anything else.
+ *
+ * The documentation focuses on the bonus version, and only exists in the
+ * mandatory section if nothing was changed between it and the bonus.
+ *
+ * The best place to start would be @ref ft_printf.c, after which you can
+ * refer to @ref handle_sequence"files inside srcs/bonus/".
+ */
