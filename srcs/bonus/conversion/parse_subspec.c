@@ -6,7 +6,7 @@
 /*   By: tgrekov <tgrekov@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 17:52:45 by tgrekov           #+#    #+#             */
-/*   Updated: 2024/02/13 07:23:51 by tgrekov          ###   ########.fr       */
+/*   Updated: 2024/02/13 13:43:57 by tgrekov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ static int	subspec_parse_width_or_precision(const char **format, va_list args)
  */
 void	parse_subspec(const char **format, t_subspec *subspec, va_list args)
 {
-	while (ft_strchr("-+ #0_", **format))
+	while (**format && ft_strchr("-+ #0_", **format))
 	{
 		if (**format == '-')
 			subspec->left_justify = 1;
