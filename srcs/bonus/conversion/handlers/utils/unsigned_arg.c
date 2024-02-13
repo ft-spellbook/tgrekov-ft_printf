@@ -6,15 +6,32 @@
 /*   By: tgrekov <tgrekov@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 07:31:57 by tgrekov           #+#    #+#             */
-/*   Updated: 2024/02/02 04:13:03 by tgrekov          ###   ########.fr       */
+/*   Updated: 2024/02/13 08:36:45 by tgrekov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+/**
+ * @file srcs/bonus/conversion/handlers/utils/unsigned_arg.c
+ * @dontinclude srcs/bonus/conversion/handlers/utils/unsigned_arg.c
+ * @line /\* *********
+ * @until /\* *********
+ */
 
 #include <stdarg.h>
 #include <stdlib.h>
 #include "../../subspec.h"
 #include "../../../utils/internal_types.h"
 
+/**
+ * @brief Retrieves the next unsigned variable argument in the appropriate
+ * size dependent on the @ref e_lenmod"length modifier".
+ * 
+ * For more info on the length modifiers, see @ref ft_printf.c
+ * 
+ * @param[in, out] args 
+ * @param[in] lenmod 
+ * @retval t_ubiggest Retrieved value
+ */
 t_ubiggest	unsigned_arg(va_list args, t_lenmod lenmod)
 {
 	if (lenmod == hh)

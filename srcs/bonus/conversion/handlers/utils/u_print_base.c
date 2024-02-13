@@ -6,9 +6,16 @@
 /*   By: tgrekov <tgrekov@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 02:31:45 by tgrekov           #+#    #+#             */
-/*   Updated: 2024/02/12 06:36:41 by tgrekov          ###   ########.fr       */
+/*   Updated: 2024/02/13 08:36:52 by tgrekov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+/**
+ * @file srcs/bonus/conversion/handlers/utils/u_print_base.c
+ * @dontinclude srcs/bonus/conversion/handlers/utils/u_print_base.c
+ * @line /\* *********
+ * @until /\* *********
+ */
 
 #include <unistd.h>
 #include "../../sequence.h"
@@ -16,6 +23,15 @@
 #include "../../../utils/internal_types.h"
 #include "../../../../../libft/libft.h"
 
+/**
+ * @brief Writes an unsigned integer in base @p base on descriptor @p fd,
+ * with respect to the @ref s_subspec::precision.
+ * 
+ * @param[in] seq 
+ * @param[in] fd 
+ * @param[in] base 
+ * @retval int Number of characters written, or @p -1 on error.
+ */
 int	u_print_base(t_sequence seq, int fd, char *base)
 {
 	int	res;
