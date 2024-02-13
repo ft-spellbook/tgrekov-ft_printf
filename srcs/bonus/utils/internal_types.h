@@ -6,9 +6,16 @@
 /*   By: tgrekov <tgrekov@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 20:40:21 by tgrekov           #+#    #+#             */
-/*   Updated: 2024/02/02 04:12:41 by tgrekov          ###   ########.fr       */
+/*   Updated: 2024/02/13 05:43:11 by tgrekov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+/**
+ * @file internal_types.h
+ * @dontinclude internal_types.h
+ * @line /\* *********
+ * @until /\* *********
+ */
 
 #ifndef INTERNAL_TYPES_H
 # define INTERNAL_TYPES_H

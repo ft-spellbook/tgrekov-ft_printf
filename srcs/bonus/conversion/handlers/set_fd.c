@@ -6,7 +6,7 @@
 /*   By: tgrekov <tgrekov@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 17:58:03 by tgrekov           #+#    #+#             */
-/*   Updated: 2024/02/02 04:30:59 by tgrekov          ###   ########.fr       */
+/*   Updated: 2024/02/13 04:44:22 by tgrekov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,6 @@ static int	process_set_fd(t_sequence seq, int *fd, int total)
 void	pre_set_fd(va_list args, t_sequence *seq)
 {
 	seq->data = (t_ubiggest) va_arg(args, int);
+	seq->subspec.min_width = 0;
 	seq->process = process_set_fd;
 }

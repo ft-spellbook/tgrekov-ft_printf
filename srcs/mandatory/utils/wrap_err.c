@@ -6,11 +6,9 @@
 /*   By: tgrekov <tgrekov@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 02:49:16 by tgrekov           #+#    #+#             */
-/*   Updated: 2024/02/02 04:18:01 by tgrekov          ###   ########.fr       */
+/*   Updated: 2024/02/12 06:56:46 by tgrekov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <unistd.h>
 
 int	wrap_err(int n, int *total)
 {

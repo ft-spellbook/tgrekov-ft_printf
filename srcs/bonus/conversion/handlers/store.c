@@ -6,7 +6,7 @@
 /*   By: tgrekov <tgrekov@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 18:18:34 by tgrekov           #+#    #+#             */
-/*   Updated: 2024/02/02 04:44:59 by tgrekov          ###   ########.fr       */
+/*   Updated: 2024/02/13 05:06:04 by tgrekov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 static int	process_store(t_sequence seq, int *fd, int total)
 {
 	(void) fd;
+	if (!seq.data)
+		return (-1);
 	if (seq.subspec.lenmod == hh)
 		*((signed char *) seq.data) = total;
 	else if (seq.subspec.lenmod == h)
@@ -56,5 +58,6 @@ void	pre_store(va_list args, t_sequence *seq)
 		seq->data = (t_ubiggest) va_arg(args, t_ptrdiff_t *);
 	else
 		seq->data = (t_ubiggest) va_arg(args, int *);
+	seq->subspec.min_width = 0;
 	seq->process = process_store;
 }
