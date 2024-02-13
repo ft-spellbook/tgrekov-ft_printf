@@ -6,9 +6,16 @@
 /*   By: tgrekov <tgrekov@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 17:48:47 by tgrekov           #+#    #+#             */
-/*   Updated: 2024/02/12 06:36:20 by tgrekov          ###   ########.fr       */
+/*   Updated: 2024/02/13 07:10:10 by tgrekov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+/**
+ * @file srcs/bonus/utils/u_put_base.c
+ * @dontinclude srcs/bonus/utils/u_put_base.c
+ * @line /\* *********
+ * @until /\* *********
+ */
 
 #include <unistd.h>
 #include "internal_types.h"
@@ -31,6 +38,14 @@ static int	_u_put_base(t_ubiggest n,
 	return (res + 1);
 }
 
+/**
+ * @brief Write unsigned number @p n on descriptor @p fd in base @p base.
+ * 
+ * @param[in] n 
+ * @param[in] base 
+ * @param[in] fd 
+ * @retval int Number of characters written, or @p -1 on error.
+ */
 int	u_put_base(t_ubiggest n, char *base, int fd)
 {
 	return (_u_put_base(n, base, ft_strlen(base), fd));

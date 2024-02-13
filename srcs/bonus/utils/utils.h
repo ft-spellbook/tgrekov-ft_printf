@@ -6,9 +6,16 @@
 /*   By: tgrekov <tgrekov@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 17:32:00 by tgrekov           #+#    #+#             */
-/*   Updated: 2024/02/02 04:17:15 by tgrekov          ###   ########.fr       */
+/*   Updated: 2024/02/13 06:29:06 by tgrekov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+/**
+ * @file srcs/bonus/utils/utils.h
+ * @dontinclude srcs/bonus/utils/utils.h
+ * @line /\* *********
+ * @until /\* *********
+ */
 
 #ifndef UTILS_H
 # define UTILS_H

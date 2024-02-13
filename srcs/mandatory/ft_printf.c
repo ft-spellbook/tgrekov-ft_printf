@@ -6,13 +6,13 @@
 /*   By: tgrekov <tgrekov@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 23:03:16 by tgrekov           #+#    #+#             */
-/*   Updated: 2024/02/13 06:04:10 by tgrekov          ###   ########.fr       */
+/*   Updated: 2024/02/13 07:22:32 by tgrekov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /**
- * @file ft_printf.c
- * @dontinclude ft_printf.c
+ * @file srcs/mandatory/ft_printf.c
+ * @dontinclude srcs/mandatory/ft_printf.c
  * @line /\* *********
  * @until /\* *********
  */

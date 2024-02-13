@@ -6,9 +6,16 @@
 /*   By: tgrekov <tgrekov@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 21:26:03 by tgrekov           #+#    #+#             */
-/*   Updated: 2024/02/12 06:36:15 by tgrekov          ###   ########.fr       */
+/*   Updated: 2024/02/13 06:25:59 by tgrekov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+/**
+ * @file srcs/bonus/utils/repeat_str_n.c
+ * @dontinclude srcs/bonus/utils/repeat_str_n.c
+ * @line /\* *********
+ * @until /\* *********
+ */
 
 #include "../../../libft/libft.h"
 
@@ -31,6 +38,15 @@ static int	_repeat_str_n(const char *str, int n, int strlen, int fd)
 	return (res + res2);
 }
 
+/**
+ * @brief Write exactly @p n characters from @p str on descriptor @p fd.
+ * Repeats string if @p ft_strlen(str) is greater than @p n.
+ * 
+ * @param[in] str
+ * @param[in] n
+ * @param[in] fd
+ * @retval int Number of characters written, or @p -1 on error.
+ */
 int	repeat_str_n(const char *str, int n, int fd)
 {
 	if (n < 1)
